@@ -13,7 +13,7 @@ class FactCell: UICollectionViewCell {
     
     lazy var cardLabel: UILabel = {
         let cardLabel = UILabel()
-        cardLabel.text = "Polydactyl cats (a cat with 1-2 extra toes on their paws) have this as a result of a genetic mutation. These cats are also referred to as 'Hemingway cats' because writer Ernest Hemingway reportedly owned dozens of them at his home in Key West, Florida."
+//        cardLabel.text = "Polydactyl cats (a cat with 1-2 extra toes on their paws) have this as a result of a genetic mutation. These cats are also referred to as 'Hemingway cats' because writer Ernest Hemingway reportedly owned dozens of them at his home in Key West, Florida."
         cardLabel.font = UIFont.vartaRegular
         cardLabel.numberOfLines = 10
         cardLabel.textAlignment = .justified
@@ -46,8 +46,6 @@ class FactCell: UICollectionViewCell {
             buttonFavorite.topAnchor.constraint(equalTo: cardLabel.bottomAnchor),
             buttonFavorite.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 284),
             buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
-//            buttonFavorite.widthAnchor.constraint(equalToConstant: 50),
-//            buttonFavorite.heightAnchor.constraint(equalToConstant: 50)
             
         
         ])
@@ -56,6 +54,7 @@ class FactCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 20
+        self.backgroundColor = .white
         buttonFavorite.contentMode = .scaleAspectFit
         setUpConstraints()
        
