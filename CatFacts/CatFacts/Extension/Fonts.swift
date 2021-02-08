@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import UIKit
+
+extension UIFont {
+    static let vartaRegular = UIFont(name: "Varta-Regular", size: 16)
+}
