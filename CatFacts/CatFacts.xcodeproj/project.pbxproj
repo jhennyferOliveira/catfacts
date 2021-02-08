@@ -18,6 +18,14 @@
 		EF1FEE9E25CD6F3A00A23358 /* FactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */; };
 		EF1FEEA325CD6F4D00A23358 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEA225CD6F4D00A23358 /* ViewModel.swift */; };
 		EF1FEEA825CD6F5900A23358 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEA725CD6F5900A23358 /* Model.swift */; };
+		EF1FEEAD25CD718100A23358 /* FactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEAC25CD718100A23358 /* FactsViewController.swift */; };
+		EF1FEEBB25CD86DA00A23358 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */; };
+		EF1FEEC125CD896800A23358 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEC025CD896800A23358 /* Colors.swift */; };
+		EFA26A2025CF7B1D00E97AF7 /* FactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */; };
+		EFA26A3D25CF9BCF00E97AF7 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A3C25CF9BCF00E97AF7 /* Fonts.swift */; };
+		EFA26A4B25CF9E7600E97AF7 /* Varta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFA26A4A25CF9E7600E97AF7 /* Varta-Regular.ttf */; };
+		EFA26A5325CFA35500E97AF7 /* FactCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */; };
+		EFA26A6825D0E9FD00E97AF7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A6725D0E9FD00E97AF7 /* FavoriteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +63,14 @@
 		EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsView.swift; sourceTree = "<group>"; };
 		EF1FEEA225CD6F4D00A23358 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EF1FEEA725CD6F5900A23358 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		EF1FEEAC25CD718100A23358 /* FactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsViewController.swift; sourceTree = "<group>"; };
+		EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		EF1FEEC025CD896800A23358 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCell.swift; sourceTree = "<group>"; };
+		EFA26A3C25CF9BCF00E97AF7 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		EFA26A4A25CF9E7600E97AF7 /* Varta-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Varta-Regular.ttf"; sourceTree = "<group>"; };
+		EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCollectionViewController.swift; sourceTree = "<group>"; };
+		EFA26A6725D0E9FD00E97AF7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,11 +121,13 @@
 		EF1FEE5225CD6B5A00A23358 /* CatFacts */ = {
 			isa = PBXGroup;
 			children = (
+				EF1FEEBF25CD895600A23358 /* Extension */,
 				EF1FEE8E25CD6EBD00A23358 /* Config */,
 				EF1FEE8B25CD6E8A00A23358 /* View */,
 				EF1FEE8A25CD6E8300A23358 /* ViewModel */,
 				EF1FEE8925CD6E7B00A23358 /* Model */,
 				EF1FEE5F25CD6B5B00A23358 /* Assets.xcassets */,
+				EF1FEE6425CD6B5B00A23358 /* Info.plist */,
 			);
 			path = CatFacts;
 			sourceTree = "<group>";
@@ -152,9 +170,11 @@
 		EF1FEE8B25CD6E8A00A23358 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EFA26A5A25CFA36200E97AF7 /* FactCell */,
 				EF1FEE6125CD6B5B00A23358 /* LaunchScreen.storyboard */,
 				EF1FEE8D25CD6EAA00A23358 /* Favorite */,
 				EF1FEE8C25CD6E9700A23358 /* Facts */,
+				EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */,
+				EF1FEEAC25CD718100A23358 /* FactsViewController.swift */,
 			);
 			path = Facts;
 			sourceTree = "<group>";
@@ -171,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				EF1FEE9525CD6F2A00A23358 /* FavoriteView.swift */,
+				EFA26A6725D0E9FD00E97AF7 /* FavoriteViewController.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -178,11 +200,29 @@
 		EF1FEE8E25CD6EBD00A23358 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				EF1FEE6425CD6B5B00A23358 /* Info.plist */,
 				EF1FEE5325CD6B5A00A23358 /* AppDelegate.swift */,
 				EF1FEE5525CD6B5A00A23358 /* SceneDelegate.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		EF1FEEBF25CD895600A23358 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EFA26A4A25CF9E7600E97AF7 /* Varta-Regular.ttf */,
+				EF1FEEC025CD896800A23358 /* Colors.swift */,
+				EFA26A3C25CF9BCF00E97AF7 /* Fonts.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		EFA26A5A25CFA36200E97AF7 /* FactCell */ = {
+			isa = PBXGroup;
+			children = (
+				EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */,
+				EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */,
+			);
+			path = FactCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF1FEE6325CD6B5B00A23358 /* LaunchScreen.storyboard in Resources */,
+				EFA26A4B25CF9E7600E97AF7 /* Varta-Regular.ttf in Resources */,
 				EF1FEE6025CD6B5B00A23358 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,9 +356,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF1FEEA825CD6F5900A23358 /* Model.swift in Sources */,
+				EFA26A5325CFA35500E97AF7 /* FactCollectionViewController.swift in Sources */,
+				EF1FEEC125CD896800A23358 /* Colors.swift in Sources */,
 				EF1FEE9E25CD6F3A00A23358 /* FactsView.swift in Sources */,
 				EF1FEE9625CD6F2A00A23358 /* FavoriteView.swift in Sources */,
+				EFA26A3D25CF9BCF00E97AF7 /* Fonts.swift in Sources */,
+				EF1FEEBB25CD86DA00A23358 /* TabBarController.swift in Sources */,
+				EFA26A2025CF7B1D00E97AF7 /* FactCell.swift in Sources */,
 				EF1FEE5425CD6B5A00A23358 /* AppDelegate.swift in Sources */,
+				EF1FEEAD25CD718100A23358 /* FactsViewController.swift in Sources */,
+				EFA26A6825D0E9FD00E97AF7 /* FavoriteViewController.swift in Sources */,
 				EF1FEE5E25CD6B5A00A23358 /* CatFacts.xcdatamodeld in Sources */,
 				EF1FEEA325CD6F4D00A23358 /* ViewModel.swift in Sources */,
 				EF1FEE5625CD6B5A00A23358 /* SceneDelegate.swift in Sources */,
