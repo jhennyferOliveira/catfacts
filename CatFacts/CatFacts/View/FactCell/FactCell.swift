@@ -10,10 +10,9 @@ import UIKit
 
 class FactCell: UICollectionViewCell {
     static let identifier = "factCell"
-    
+    var isFavorited = false
     lazy var cardLabel: UILabel = {
         let cardLabel = UILabel()
-//        cardLabel.text = "Polydactyl cats (a cat with 1-2 extra toes on their paws) have this as a result of a genetic mutation. These cats are also referred to as 'Hemingway cats' because writer Ernest Hemingway reportedly owned dozens of them at his home in Key West, Florida."
         cardLabel.font = UIFont.vartaRegular
         cardLabel.numberOfLines = 10
         cardLabel.textAlignment = .justified
@@ -25,11 +24,11 @@ class FactCell: UICollectionViewCell {
     
     lazy var buttonFavorite: UIButton = {
         let buttonFavorite = UIButton()
-//        let imageConfig = UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .large)
-//        buttonFavorite.setImage(UIImage(systemName: "heart.fill", withConfiguration: imageConfig)?.withTintColor(.redAction, renderingMode: .alwaysOriginal), for: .normal)
-//        buttonFavorite.target(forAction: <#T##Selector#>, withSender: <#T##Any?#>)
+        buttonFavorite.addTarget(self, action: #selector(buttonFavTouchUpInside), for: .touchUpInside)
         buttonFavorite.setImage(UIImage(named: "heartEmpty")?.withTintColor(.redAction, renderingMode: .alwaysOriginal), for: .normal)
+        buttonFavorite.contentMode = .scaleAspectFit
         buttonFavorite.translatesAutoresizingMaskIntoConstraints = false
+    
         return buttonFavorite
     }()
     
@@ -45,11 +44,28 @@ class FactCell: UICollectionViewCell {
             
             buttonFavorite.topAnchor.constraint(equalTo: cardLabel.bottomAnchor),
             buttonFavorite.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 284),
-            buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
-            
-        
+            buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
+    
+
         ])
     }
+    
+    @objc func buttonFavTouchUpInside(button: UIButton) {
+        self.isFavorited = !self.isFavorited
+        updateFavButton(isFavorite: self.isFavorited, button: button)
+        
+    }
+    
+    func updateFavButton(isFavorite: Bool, button: UIButton) {
+            if isFavorite {
+                button.setImage(UIImage(named: "heartFill"), for: .normal)
+                // save with core data
+                
+            } else {
+                button.setImage(UIImage(named: "heartEmpty"), for: .normal)
+                // delete core data
+            }
+        }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,7 +73,7 @@ class FactCell: UICollectionViewCell {
         self.backgroundColor = .white
         buttonFavorite.contentMode = .scaleAspectFit
         setUpConstraints()
-       
+        
     }
     
     required init?(coder: NSCoder) {
