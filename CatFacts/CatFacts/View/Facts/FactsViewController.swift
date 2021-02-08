@@ -6,3 +6,22 @@
 //
 
 import Foundation
+import UIKit
+
+//class FactsViewController: UIViewController {
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        
+//    }
+//
+//    override func loadView() {
+//        let factsView = FactsView()
+//        factsView.controller = self
+//        view = factsView
+//        
+//    }
+//    
+//}
+
+
