@@ -83,6 +83,7 @@ class FactsView: UIView {
     lazy var buttonNewFact: UIButton = {
         let button = UIButton()
         button.backgroundColor = .purpleAction
+        button.addTarget(self, action: #selector(newFactButton), for: .touchUpInside)
         button.setTitle("New fact", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 20
@@ -167,5 +168,10 @@ extension FactsView {
         flowLayout.itemSize = CGSize(width: 336, height: 242)
         return flowLayout
         
+    }
+    
+    @objc func newFactButton() {
+        print("a")
+//  get new fact to show in the screen
     }
 }
