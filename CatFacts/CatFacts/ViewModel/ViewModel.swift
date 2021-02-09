@@ -6,3 +6,20 @@
 //
 
 import Foundation
+import UIKit
+
+class ViewModel {
+    let service = APIHandler()
+    
+//    var fact: Fact? {
+//        didSet {
+//            self.collectionView = controller.collectionView
+//            self.collectionView?.reloadData()
+//        }
+//    }
+    var fact: Fact?
+    func getFact(completionHandler: @escaping (Fact) -> Void) {
+        service.getDataFromAPI(completionHandler: completionHandler)
+    }
+    
+}
