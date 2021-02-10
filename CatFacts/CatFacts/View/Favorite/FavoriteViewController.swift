@@ -9,30 +9,65 @@ import Foundation
 import UIKit
 
 class FavoriteViewController: UIViewController, UICollectionViewDelegate {
+    
+    let viewModelFavorite = ViewModelFavorite()
+    
+    var collectionView: UICollectionView?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
+    }
     override func loadView() {
+        super.loadView()
         let favoriteView = FavoriteView()
         favoriteView.collectionView.delegate = self
         favoriteView.collectionView.dataSource = self
         favoriteView.controller = self
+        collectionView = favoriteView.collectionView
         self.view = favoriteView
-       }
+        
+    }
+    
+    func getData() {
+        viewModelFavorite.favoriteFacts = viewModelFavorite.getAll()
+        self.collectionView?.reloadData()
+    }
+    
+    
+    
+    
 }
 
 extension FavoriteViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        
+        return viewModelFavorite.favoriteFacts?.count ?? 0
+        
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FactCell.identifier, for: indexPath)
-        if let cell = cell as? FactCell {
-            // get from API
-            cell.cardLabel.text = "Polydactyl cats (a cat with 1-2 extra toes on their paws) have this as a result of a genetic mutation. These cats are also referred to as 'Hemingway cats' because writer Ernest Hemingway reportedly owned dozens of them at his home in Key West, Florida."
-        }
+        guard let factCell  = collectionView.dequeueReusableCell(withReuseIdentifier: FactCell.identifier, for: indexPath) as? FactCell else { fatalError() }
         
-        return cell
-    
+        factCell.delegate = self
+        factCell.cardLabel.text = viewModelFavorite.favoriteFacts?[indexPath.item  ].favoriteText
+        factCell.buttonFavorite.setImage(UIImage(named: "heartFill"), for: .normal)
+        factCell.buttonFavorite.tag = indexPath.row
+        return factCell
+        
     }
-    
-    
 }
+
+extension FavoriteViewController: FavoriteButtonActionsDelegate {
+    func favButtonAction(button: UIButton) {
+        viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
+        let favoriteFacts = viewModelFavorite.favoriteFacts
+        guard let id = favoriteFacts?[button.tag].id else {return}
+        viewModelFavorite.deleteItem(id:id)
+        collectionView?.reloadData()
+             
+ 
+    }
+}
+
+
