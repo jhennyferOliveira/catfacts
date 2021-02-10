@@ -8,9 +8,17 @@
 import Foundation
 import UIKit
 
+protocol FavoriteButtonActionsDelegate {
+    func favButtonAction(button: UIButton)
+}
+
 class FactCell: UICollectionViewCell {
+   
+    
+    var factCollectionViewController: FactCollectionViewController?
+    var delegate: FavoriteButtonActionsDelegate?
     static let identifier = "factCell"
-    var isFavorited = false
+    
     lazy var cardLabel: UILabel = {
         let cardLabel = UILabel()
         cardLabel.font = UIFont.vartaRegular
@@ -24,13 +32,16 @@ class FactCell: UICollectionViewCell {
     
     lazy var buttonFavorite: UIButton = {
         let buttonFavorite = UIButton()
-        buttonFavorite.addTarget(self, action: #selector(buttonFavTouchUpInside), for: .touchUpInside)
+        
         buttonFavorite.setImage(UIImage(named: "heartEmpty")?.withTintColor(.redAction, renderingMode: .alwaysOriginal), for: .normal)
+        buttonFavorite .addTarget(self, action: #selector(buttonFavTouchUpInside), for: .touchUpInside)
         buttonFavorite.contentMode = .scaleAspectFit
         buttonFavorite.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         return buttonFavorite
     }()
+    
+    
     
     func setUpConstraints() {
         self.addSubview(cardLabel)
@@ -45,27 +56,14 @@ class FactCell: UICollectionViewCell {
             buttonFavorite.topAnchor.constraint(equalTo: cardLabel.bottomAnchor),
             buttonFavorite.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 284),
             buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
-    
-
+            
+            
         ])
     }
     
     @objc func buttonFavTouchUpInside(button: UIButton) {
-        self.isFavorited = !self.isFavorited
-        updateFavButton(isFavorite: self.isFavorited, button: button)
-        
+        delegate?.favButtonAction(button: buttonFavorite)
     }
-    
-    func updateFavButton(isFavorite: Bool, button: UIButton) {
-            if isFavorite {
-                button.setImage(UIImage(named: "heartFill"), for: .normal)
-                // save with core data
-                
-            } else {
-                button.setImage(UIImage(named: "heartEmpty"), for: .normal)
-                // delete core data
-            }
-        }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
