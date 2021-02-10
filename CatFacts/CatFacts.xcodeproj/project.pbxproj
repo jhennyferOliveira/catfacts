@@ -16,9 +16,8 @@
 		EF1FEE7925CD6B5C00A23358 /* CatFactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE7825CD6B5C00A23358 /* CatFactsUITests.swift */; };
 		EF1FEE9625CD6F2A00A23358 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE9525CD6F2A00A23358 /* FavoriteView.swift */; };
 		EF1FEE9E25CD6F3A00A23358 /* FactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */; };
-		EF1FEEA325CD6F4D00A23358 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEA225CD6F4D00A23358 /* ViewModel.swift */; };
+		EF1FEEA325CD6F4D00A23358 /* ViewModelFact.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEA225CD6F4D00A23358 /* ViewModelFact.swift */; };
 		EF1FEEA825CD6F5900A23358 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEA725CD6F5900A23358 /* Model.swift */; };
-		EF1FEEAD25CD718100A23358 /* FactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEAC25CD718100A23358 /* FactsViewController.swift */; };
 		EF1FEEBB25CD86DA00A23358 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */; };
 		EF1FEEC125CD896800A23358 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEC025CD896800A23358 /* Colors.swift */; };
 		EFA26A2025CF7B1D00E97AF7 /* FactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */; };
@@ -26,6 +25,11 @@
 		EFA26A4B25CF9E7600E97AF7 /* Varta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFA26A4A25CF9E7600E97AF7 /* Varta-Regular.ttf */; };
 		EFA26A5325CFA35500E97AF7 /* FactCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */; };
 		EFA26A6825D0E9FD00E97AF7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A6725D0E9FD00E97AF7 /* FavoriteViewController.swift */; };
+		EFA26A7125D1807500E97AF7 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A7025D1807500E97AF7 /* APIHandler.swift */; };
+		EFA4106625D2D40A00DF7841 /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA4106525D2D40A00DF7841 /* CoreDataFunctions.swift */; };
+		EFA4107425D3FC2700DF7841 /* ViewModelFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA4107325D3FC2700DF7841 /* ViewModelFavorite.swift */; };
+		EFB6836025D2B54300E107FA /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB6835E25D2B54300E107FA /* Favorite+CoreDataClass.swift */; };
+		EFB6836125D2B54300E107FA /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB6835F25D2B54300E107FA /* Favorite+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,9 +65,8 @@
 		EF1FEE7A25CD6B5C00A23358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF1FEE9525CD6F2A00A23358 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsView.swift; sourceTree = "<group>"; };
-		EF1FEEA225CD6F4D00A23358 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		EF1FEEA225CD6F4D00A23358 /* ViewModelFact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFact.swift; sourceTree = "<group>"; };
 		EF1FEEA725CD6F5900A23358 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		EF1FEEAC25CD718100A23358 /* FactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsViewController.swift; sourceTree = "<group>"; };
 		EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF1FEEC025CD896800A23358 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCell.swift; sourceTree = "<group>"; };
@@ -71,6 +74,11 @@
 		EFA26A4A25CF9E7600E97AF7 /* Varta-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Varta-Regular.ttf"; sourceTree = "<group>"; };
 		EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCollectionViewController.swift; sourceTree = "<group>"; };
 		EFA26A6725D0E9FD00E97AF7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		EFA26A7025D1807500E97AF7 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		EFA4106525D2D40A00DF7841 /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
+		EFA4107325D3FC2700DF7841 /* ViewModelFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFavorite.swift; sourceTree = "<group>"; };
+		EFB6835E25D2B54300E107FA /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EFB6835F25D2B54300E107FA /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +129,7 @@
 		EF1FEE5225CD6B5A00A23358 /* CatFacts */ = {
 			isa = PBXGroup;
 			children = (
+				EFA26A6F25D1806500E97AF7 /* Service */,
 				EF1FEEBF25CD895600A23358 /* Extension */,
 				EF1FEE8E25CD6EBD00A23358 /* Config */,
 				EF1FEE8B25CD6E8A00A23358 /* View */,
@@ -153,7 +162,7 @@
 		EF1FEE8925CD6E7B00A23358 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EF1FEE5C25CD6B5A00A23358 /* CatFacts.xcdatamodeld */,
+				EFA4109825D4486B00DF7841 /* CoreDataModel */,
 				EF1FEEA725CD6F5900A23358 /* Model.swift */,
 			);
 			path = Model;
@@ -162,7 +171,8 @@
 		EF1FEE8A25CD6E8300A23358 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				EF1FEEA225CD6F4D00A23358 /* ViewModel.swift */,
+				EF1FEEA225CD6F4D00A23358 /* ViewModelFact.swift */,
+				EFA4107325D3FC2700DF7841 /* ViewModelFavorite.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -170,11 +180,11 @@
 		EF1FEE8B25CD6E8A00A23358 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EFA4109D25D4491E00DF7841 /* LaunchScreen */,
+				EFA4109C25D4491000DF7841 /* TabBar */,
 				EFA26A5A25CFA36200E97AF7 /* FactCell */,
-				EF1FEE6125CD6B5B00A23358 /* LaunchScreen.storyboard */,
 				EF1FEE8D25CD6EAA00A23358 /* Favorite */,
 				EF1FEE8C25CD6E9700A23358 /* Facts */,
-				EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */,
-				EF1FEEAC25CD718100A23358 /* FactsViewController.swift */,
+				EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */,
 			);
 			path = Facts;
 			sourceTree = "<group>";
@@ -220,9 +230,43 @@
 			isa = PBXGroup;
 			children = (
 				EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */,
-				EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */,
 			);
 			path = FactCell;
+			sourceTree = "<group>";
+		};
+		EFA26A6F25D1806500E97AF7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				EFA26A7025D1807500E97AF7 /* APIHandler.swift */,
+				EFA4106525D2D40A00DF7841 /* CoreDataFunctions.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		EFA4109825D4486B00DF7841 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				EF1FEE5C25CD6B5A00A23358 /* CatFacts.xcdatamodeld */,
+				EFB6835E25D2B54300E107FA /* Favorite+CoreDataClass.swift */,
+				EFB6835F25D2B54300E107FA /* Favorite+CoreDataProperties.swift */,
+			);
+			path = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		EFA4109C25D4491000DF7841 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		EFA4109D25D4491E00DF7841 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EF1FEE6125CD6B5B00A23358 /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,15 +404,19 @@
 				EF1FEEC125CD896800A23358 /* Colors.swift in Sources */,
 				EF1FEE9E25CD6F3A00A23358 /* FactsView.swift in Sources */,
 				EF1FEE9625CD6F2A00A23358 /* FavoriteView.swift in Sources */,
+				EFB6836125D2B54300E107FA /* Favorite+CoreDataProperties.swift in Sources */,
 				EFA26A3D25CF9BCF00E97AF7 /* Fonts.swift in Sources */,
 				EF1FEEBB25CD86DA00A23358 /* TabBarController.swift in Sources */,
+				EFB6836025D2B54300E107FA /* Favorite+CoreDataClass.swift in Sources */,
 				EFA26A2025CF7B1D00E97AF7 /* FactCell.swift in Sources */,
 				EF1FEE5425CD6B5A00A23358 /* AppDelegate.swift in Sources */,
-				EF1FEEAD25CD718100A23358 /* FactsViewController.swift in Sources */,
 				EFA26A6825D0E9FD00E97AF7 /* FavoriteViewController.swift in Sources */,
 				EF1FEE5E25CD6B5A00A23358 /* CatFacts.xcdatamodeld in Sources */,
-				EF1FEEA325CD6F4D00A23358 /* ViewModel.swift in Sources */,
+				EFA26A7125D1807500E97AF7 /* APIHandler.swift in Sources */,
+				EFA4107425D3FC2700DF7841 /* ViewModelFavorite.swift in Sources */,
+				EF1FEEA325CD6F4D00A23358 /* ViewModelFact.swift in Sources */,
 				EF1FEE5625CD6B5A00A23358 /* SceneDelegate.swift in Sources */,
+				EFA4106625D2D40A00DF7841 /* CoreDataFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
