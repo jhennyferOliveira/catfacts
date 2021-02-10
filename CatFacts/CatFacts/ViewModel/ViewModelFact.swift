@@ -8,19 +8,12 @@
 import Foundation
 import UIKit
 
-class ViewModel {
+class ViewModelFact {
     let service = APIHandler()
     let persistenceService = CoreDataFunctions()
     
-//    var fact: Fact? {
-//        didSet {
-//            self.collectionView = controller.collectionView
-//            self.collectionView?.reloadData()
-//        }
-//    }
     var fact: Fact?
-    var favoriteFacts: [Favorite]?
-    
+
     //MARK:- API
     func getFact(completionHandler: @escaping (Fact) -> Void) {
         service.getDataFromAPI(completionHandler: completionHandler)
@@ -30,6 +23,10 @@ class ViewModel {
     
     func save(fact: Fact) {
         persistenceService.saveFact(fact: fact)
+    }
+    
+    func deleteItem(id: UUID) {
+        persistenceService.delete(id: id)
     }
     
     func getAll() -> [Favorite] {
