@@ -40,7 +40,6 @@ class FactCollectionViewController: UIViewController {
         viewModelFact.getFact { fact in
             DispatchQueue.main.async {
                 self.viewModelFact.fact = fact
-                // reload when fact gets the value
                 self.collectionView?.reloadData()
             }
         }
@@ -75,7 +74,6 @@ extension FactCollectionViewController: FavoriteButtonActionsDelegate {
                     print(viewModelFavorite.getAll().count)
                     guard let id = favorite.id else {return}
                     viewModelFavorite.deleteItem(id: id)
-                    print(viewModelFavorite.getAll().count)
                 }
             }
             
