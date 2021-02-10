@@ -19,16 +19,18 @@ class FactsView: UIView {
     }()
     
     lazy var viewForLeftEyeAnimation: UIView = {
-        let view = UIView(frame: CGRect(x: 193.5, y: 125.7, width: 16.95, height: 11.69))
+        let view = UIView(frame: CGRect(x: 193.5, y: 125.7, width: 15.23, height: 11.11))
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(leftPupil)
         return view
     }()
     
     lazy var viewForRightEyeAnimation: UIView = {
-        let view = UIView(frame: CGRect(x: 169.5, y: 125.7, width: 16.95, height: 11.69))
+        let view = UIView(frame: CGRect(x: 169.5, y: 125.7, width: 15.23, height: 11.11))
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rightPupil)
         return view
     }()
     
@@ -52,6 +54,15 @@ class FactsView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    lazy var floorImage: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "floor")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    
     
     lazy var ball: UIImageView = {
         let view = UIImageView()
@@ -85,32 +96,49 @@ class FactsView: UIView {
         button.backgroundColor = .purpleAction
         button.setTitle("New fact", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 42/2
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    lazy var viewForEyes: UIStackView = {
+           let stackView = UIStackView(arrangedSubviews: [viewForRightEyeAnimation, viewForLeftEyeAnimation])
+        stackView.spacing = 6.41
+           stackView.distribution = .fillEqually
+           stackView.translatesAutoresizingMaskIntoConstraints = false
+           return stackView
+       }()
+    
     func setUpConstraints() {
         self.addSubview(viewForAnimation)
         viewForAnimation.addSubview(animationImage)
+        viewForAnimation.addSubview(floorImage)
         self.addSubview(card)
         self.addSubview(buttonNewFact)
         viewForAnimation.addSubview(ball)
-        viewForAnimation.addSubview(viewForLeftEyeAnimation)
-        viewForAnimation.addSubview(viewForRightEyeAnimation)
-        viewForLeftEyeAnimation.addSubview(leftPupil)
-        viewForRightEyeAnimation.addSubview(rightPupil)
+        animationImage.addSubview(viewForEyes)
         
         
         NSLayoutConstraint.activate([
             viewForAnimation.topAnchor.constraint(equalTo: self.topAnchor),
             viewForAnimation.leftAnchor.constraint(equalTo: self.leftAnchor),
-            viewForAnimation.heightAnchor.constraint(equalToConstant: 283),
             viewForAnimation.rightAnchor.constraint(equalTo: self.rightAnchor),
+
+            animationImage.bottomAnchor.constraint(equalTo: floorImage.bottomAnchor,constant: -5),
+            animationImage.widthAnchor.constraint(equalToConstant: 89),
+            animationImage.heightAnchor.constraint(equalToConstant: 192),
+            animationImage.centerXAnchor.constraint(equalTo: viewForAnimation.centerXAnchor),
             
-            animationImage.bottomAnchor.constraint(equalTo: viewForAnimation.bottomAnchor),
-            animationImage.heightAnchor.constraint(equalToConstant: 206),
-            animationImage.widthAnchor.constraint(equalToConstant: 375),
+            viewForEyes.centerXAnchor.constraint(equalTo: animationImage.centerXAnchor),
+            viewForEyes.heightAnchor.constraint(equalToConstant: 11.11),
+            viewForEyes.widthAnchor.constraint(equalToConstant: 36.9),
+            viewForEyes.topAnchor.constraint(equalTo: animationImage.topAnchor, constant: 46.6),
+            
+            
+            floorImage.bottomAnchor.constraint(equalTo: viewForAnimation.bottomAnchor),
+            floorImage.widthAnchor.constraint(equalTo: viewForAnimation.widthAnchor),
+            floorImage.centerXAnchor.constraint(equalTo: viewForAnimation.centerXAnchor),
+
             
             card.widthAnchor.constraint(equalToConstant: 336),
             card.heightAnchor.constraint(equalToConstant: 242),
@@ -119,28 +147,11 @@ class FactsView: UIView {
             
             
             buttonNewFact.topAnchor.constraint(equalTo: card.bottomAnchor, constant: 16),
-            buttonNewFact.heightAnchor.constraint(equalToConstant: 37),
+            buttonNewFact.heightAnchor.constraint(equalToConstant: 42),
             buttonNewFact.widthAnchor.constraint(equalToConstant: 138),
             buttonNewFact.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            buttonNewFact.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100),
             
-            viewForLeftEyeAnimation.topAnchor.constraint(equalTo: viewForAnimation.topAnchor, constant: 125.7),
-            viewForLeftEyeAnimation.leftAnchor.constraint(equalTo: viewForAnimation.leftAnchor, constant: 193.5),
-            viewForLeftEyeAnimation.widthAnchor.constraint(equalToConstant: 16.95),
-            viewForLeftEyeAnimation.heightAnchor.constraint(equalToConstant: 11.69),
-            
-            leftPupil.centerXAnchor.constraint(equalTo: viewForLeftEyeAnimation.centerXAnchor),
-            leftPupil.widthAnchor.constraint(equalToConstant: 8),
-            leftPupil.heightAnchor.constraint(equalToConstant: 8),
-            
-            viewForRightEyeAnimation.topAnchor.constraint(equalTo: viewForAnimation.topAnchor, constant: 125.7),
-            viewForRightEyeAnimation.leftAnchor.constraint(equalTo: viewForAnimation.leftAnchor, constant: 169.5),
-            viewForRightEyeAnimation.widthAnchor.constraint(equalToConstant: 16.95),
-            viewForRightEyeAnimation.heightAnchor.constraint(equalToConstant: 11.69),
-            
-            rightPupil.centerXAnchor.constraint(equalTo: viewForRightEyeAnimation.centerXAnchor),
-            rightPupil.widthAnchor.constraint(equalToConstant: 8),
-            rightPupil.heightAnchor.constraint(equalToConstant: 8)
-
         ])
         
     }
@@ -166,6 +177,5 @@ extension FactsView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: 336, height: 242)
         return flowLayout
-        
     }
 }
