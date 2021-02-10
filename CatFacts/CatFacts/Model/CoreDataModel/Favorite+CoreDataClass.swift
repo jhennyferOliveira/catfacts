@@ -12,16 +12,4 @@ import CoreData
 @objc(Favorite)
 public class Favorite: NSManagedObject {
 
-    func save() {
-        
-        
-    }
-    
-    func delete() {
-        
-    }
-    
-    func getAll() {
-        
-    }
 }

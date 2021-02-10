@@ -10,6 +10,7 @@ import UIKit
 
 class ViewModel {
     let service = APIHandler()
+    let persistenceService = CoreDataFunctions()
     
 //    var fact: Fact? {
 //        didSet {
@@ -18,8 +19,20 @@ class ViewModel {
 //        }
 //    }
     var fact: Fact?
+    var favoriteFacts: [Favorite]?
+    
+    //MARK:- API
     func getFact(completionHandler: @escaping (Fact) -> Void) {
         service.getDataFromAPI(completionHandler: completionHandler)
     }
     
+    //MARK:- COREDATA
+    
+    func save(fact: Fact) {
+        persistenceService.saveFact(fact: fact)
+    }
+    
+    func getAll() -> [Favorite] {
+        return persistenceService.getAll()
+    }
 }
