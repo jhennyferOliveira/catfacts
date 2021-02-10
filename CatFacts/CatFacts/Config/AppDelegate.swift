@@ -86,5 +86,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    static var persistentContainer: NSPersistentContainer {
+                 return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+          }
+        
+        // MARK: - Core Data Saving support
+        
+    static var viewContext: NSManagedObjectContext {
+                    let viewContext = persistentContainer.viewContext
+                        viewContext.automaticallyMergesChangesFromParent = true
+                    return viewContext
+            }
+    
 }
 
