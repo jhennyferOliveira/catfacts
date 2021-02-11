@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,6 @@
 		EF1FEE5E25CD6B5A00A23358 /* CatFacts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE5C25CD6B5A00A23358 /* CatFacts.xcdatamodeld */; };
 		EF1FEE6025CD6B5B00A23358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF1FEE5F25CD6B5B00A23358 /* Assets.xcassets */; };
 		EF1FEE6325CD6B5B00A23358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF1FEE6125CD6B5B00A23358 /* LaunchScreen.storyboard */; };
-		EF1FEE6E25CD6B5C00A23358 /* CatFactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE6D25CD6B5C00A23358 /* CatFactsTests.swift */; };
 		EF1FEE7925CD6B5C00A23358 /* CatFactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE7825CD6B5C00A23358 /* CatFactsUITests.swift */; };
 		EF1FEE9625CD6F2A00A23358 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE9525CD6F2A00A23358 /* FavoriteView.swift */; };
 		EF1FEE9E25CD6F3A00A23358 /* FactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */; };
@@ -20,6 +19,8 @@
 		EF1FEEA825CD6F5900A23358 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEA725CD6F5900A23358 /* Model.swift */; };
 		EF1FEEBB25CD86DA00A23358 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */; };
 		EF1FEEC125CD896800A23358 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEC025CD896800A23358 /* Colors.swift */; };
+		EF2FA1F925D55BC0007CD7C2 /* CatFacts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE5C25CD6B5A00A23358 /* CatFacts.xcdatamodeld */; };
+		EF2FA24D25D5639A007CD7C2 /* TestCoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2FA24C25D5639A007CD7C2 /* TestCoreDataFunctions.swift */; };
 		EFA26A2025CF7B1D00E97AF7 /* FactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */; };
 		EFA26A3D25CF9BCF00E97AF7 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A3C25CF9BCF00E97AF7 /* Fonts.swift */; };
 		EFA26A4B25CF9E7600E97AF7 /* Varta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFA26A4A25CF9E7600E97AF7 /* Varta-Regular.ttf */; };
@@ -58,7 +59,6 @@
 		EF1FEE6225CD6B5B00A23358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF1FEE6425CD6B5B00A23358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF1FEE6925CD6B5C00A23358 /* CatFactsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatFactsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF1FEE6D25CD6B5C00A23358 /* CatFactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatFactsTests.swift; sourceTree = "<group>"; };
 		EF1FEE6F25CD6B5C00A23358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF1FEE7425CD6B5C00A23358 /* CatFactsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatFactsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF1FEE7825CD6B5C00A23358 /* CatFactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatFactsUITests.swift; sourceTree = "<group>"; };
@@ -69,6 +69,7 @@
 		EF1FEEA725CD6F5900A23358 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF1FEEC025CD896800A23358 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EF2FA24C25D5639A007CD7C2 /* TestCoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataFunctions.swift; sourceTree = "<group>"; };
 		EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCell.swift; sourceTree = "<group>"; };
 		EFA26A3C25CF9BCF00E97AF7 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		EFA26A4A25CF9E7600E97AF7 /* Varta-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Varta-Regular.ttf"; sourceTree = "<group>"; };
@@ -144,8 +145,8 @@
 		EF1FEE6C25CD6B5C00A23358 /* CatFactsTests */ = {
 			isa = PBXGroup;
 			children = (
-				EF1FEE6D25CD6B5C00A23358 /* CatFactsTests.swift */,
 				EF1FEE6F25CD6B5C00A23358 /* Info.plist */,
+				EF2FA24C25D5639A007CD7C2 /* TestCoreDataFunctions.swift */,
 			);
 			path = CatFactsTests;
 			sourceTree = "<group>";
@@ -348,7 +349,7 @@
 				};
 			};
 			buildConfigurationList = EF1FEE4B25CD6B5A00A23358 /* Build configuration list for PBXProject "CatFacts" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -424,7 +425,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF1FEE6E25CD6B5C00A23358 /* CatFactsTests.swift in Sources */,
+				EF2FA24D25D5639A007CD7C2 /* TestCoreDataFunctions.swift in Sources */,
+				EF2FA1F925D55BC0007CD7C2 /* CatFacts.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +596,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.JhennyferOliveira.CatFacts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -613,7 +615,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.JhennyferOliveira.CatFacts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
