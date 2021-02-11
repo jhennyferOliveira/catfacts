@@ -25,6 +25,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
         favoriteView.controller = self
         collectionView = favoriteView.collectionView
         self.view = favoriteView
+        overrideUserInterfaceStyle = .light
         
     }
     
@@ -32,10 +33,6 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
         viewModelFavorite.favoriteFacts = viewModelFavorite.getAll()
         self.collectionView?.reloadData()
     }
-    
-    
-    
-    
 }
 
 extension FavoriteViewController: UICollectionViewDataSource {
@@ -64,6 +61,7 @@ extension FavoriteViewController: FavoriteButtonActionsDelegate {
         let favoriteFacts = viewModelFavorite.favoriteFacts
         guard let id = favoriteFacts?[button.tag].id else {return}
         viewModelFavorite.deleteItem(id:id)
+        getData()
         collectionView?.reloadData()
              
  
