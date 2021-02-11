@@ -9,7 +9,7 @@ import XCTest
 @testable import CatFacts
 import CoreData
 
-class test: XCTestCase {
+class TestCoreDataFunctions: XCTestCase {
     
     var sut: CoreDataFunctions?
     
@@ -21,18 +21,40 @@ class test: XCTestCase {
         let totalFactsBeforeSaving = sut?.getAll(context: mockPersistantContainer.viewContext)
         let fact = Fact(fact: "some fact", length: 200)
         sut?.saveFact(fact: fact, context: mockPersistantContainer.viewContext)
-        do {
-            try mockPersistantContainer.viewContext.save()
-        }  catch {
-            print("create fakes error \(error)")
-        }
+        saveInContextMock()
         let totalFactsAfterSaving = sut?.getAll(context: mockPersistantContainer.viewContext)
-        
         guard let totalFactsBefore = totalFactsBeforeSaving else {return}
         guard let totalFactsAfter = totalFactsAfterSaving else {return}
         XCTAssertEqual(totalFactsBefore.count, totalFactsAfter.count - 1)
         
     }
+    
+    func testDeleteFavoriteFact() {
+        let fact = Fact(fact: "some fact 2", length: 200)
+        let favorite = sut?.saveFact(fact: fact, context: mockPersistantContainer.viewContext)
+
+        let totalFactsBeforeDeleting = sut?.getAll(context: mockPersistantContainer.viewContext)
+        
+        guard let id = favorite?.id else {return}
+        sut?.delete(id: id, context: mockPersistantContainer.viewContext)
+        
+        let totalFactsAfterDeleting = sut?.getAll(context: mockPersistantContainer.viewContext)
+  
+
+        guard let totalFactsBefore = totalFactsBeforeDeleting else {return}
+        guard let totalFactsAfter = totalFactsAfterDeleting else {return}
+        XCTAssertTrue(totalFactsAfter.count == totalFactsBefore.count - 1)
+    }
+    
+    func testGetAll() {
+        let fact = Fact(fact: "some fact 3", length: 200)
+        _ = sut?.saveFact(fact: fact, context: mockPersistantContainer.viewContext)
+        saveInContextMock()
+        let totalFacts = sut?.getAll(context: mockPersistantContainer.viewContext)
+        XCTAssertTrue(totalFacts != [])
+    }
+       
+    
 
 
     //MARK: mock in-memory persistant store
@@ -61,4 +83,13 @@ class test: XCTestCase {
         return container
     }()
     
+    func saveInContextMock() {
+        do {
+            try mockPersistantContainer.viewContext.save()
+        }  catch {
+            print("create fakes error \(error)")
+        }
+    }
+    
 }
+
