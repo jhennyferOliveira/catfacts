@@ -29,6 +29,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         item2.tabBarItem = icon2
         item1.tabBarItem = icon1
+        tabBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         
         
