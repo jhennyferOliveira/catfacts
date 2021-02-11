@@ -22,7 +22,7 @@ class ViewModelFact {
     //MARK:- COREDATA
     
     func save(fact: Fact) {
-        persistenceService.saveFact(fact: fact)
+        _ = persistenceService.saveFact(fact: fact)
     }
     
     func deleteItem(id: UUID) {
