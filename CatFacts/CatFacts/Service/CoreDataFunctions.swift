@@ -8,9 +8,12 @@
 import Foundation
 import CoreData
 
-class CoreDataFunctions {
+public class CoreDataFunctions {
     
     let context = AppDelegate.viewContext
+    
+    init(container: NSPersistentContainer = AppDelegate.persistentContainer) {
+    }
     
     func save(){
         do {
@@ -20,16 +23,17 @@ class CoreDataFunctions {
         }
     }
     
-    func saveFact(fact: Fact ) {
-        guard let object = NSEntityDescription.insertNewObject(forEntityName: "Favorite", into: context) as? Favorite else { return }
+    func saveFact(fact: Fact, context: NSManagedObjectContext = AppDelegate.viewContext  ) -> Favorite {
+        guard let object = NSEntityDescription.insertNewObject(forEntityName: "Favorite", into: context) as? Favorite else { return Favorite()}
         object.id = UUID()
         object.favoriteText = fact.fact
         save()
+        return object
     }
     
 
-    func delete(id: UUID) {
-        let favorites = getAll()
+    func delete(id: UUID, context: NSManagedObjectContext = AppDelegate.viewContext ) {
+        let favorites = getAll(context: context)
         for favorite in favorites {
             if favorite.id == id {
                 context.delete(favorite)
@@ -39,7 +43,7 @@ class CoreDataFunctions {
         }
     }
     
-    func getAll() -> [Favorite] {
+    func getAll(context: NSManagedObjectContext = AppDelegate.viewContext ) -> [Favorite] {
         guard let favorites: [Favorite] = try? context.fetch(Favorite.fetchRequest()) else {
             return []
         }
