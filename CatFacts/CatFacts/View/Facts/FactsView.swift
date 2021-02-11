@@ -8,9 +8,13 @@
 import Foundation
 import UIKit
 
+protocol HandlePanGestureDelegate {
+    func handlePan(sender: UIPanGestureRecognizer)
+}
+
 class FactsView: UIView {
     var controller: FactCollectionViewController?
-    
+    var delegate: HandlePanGestureDelegate?
     lazy var viewForAnimation: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 283))
         view.backgroundColor = .yellowPrimary
@@ -23,6 +27,8 @@ class FactsView: UIView {
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(leftPupil)
+        leftPupil.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        leftPupil.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return view
     }()
     
@@ -31,6 +37,8 @@ class FactsView: UIView {
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rightPupil)
+        rightPupil.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        rightPupil.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return view
     }()
     
@@ -65,8 +73,11 @@ class FactsView: UIView {
     
     
     lazy var ball: UIImageView = {
-        let view = UIImageView()
+        let view = UIImageView(frame: CGRect(x: 200, y: viewForAnimation.bounds.minY, width: 64, height: 64))
         view.image = UIImage(named: "ball")
+        let panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
+        view.addGestureRecognizer(panGestureRecognizer)
+        view.isUserInteractionEnabled = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
         
@@ -135,7 +146,7 @@ class FactsView: UIView {
             viewForEyes.topAnchor.constraint(equalTo: animationImage.topAnchor, constant: 46.6),
             
             
-            floorImage.bottomAnchor.constraint(equalTo: viewForAnimation.bottomAnchor),
+            floorImage.bottomAnchor.constraint(equalTo: viewForAnimation.bottomAnchor, constant: 5),
             floorImage.widthAnchor.constraint(equalTo: viewForAnimation.widthAnchor),
             floorImage.centerXAnchor.constraint(equalTo: viewForAnimation.centerXAnchor),
 
@@ -144,6 +155,10 @@ class FactsView: UIView {
             card.heightAnchor.constraint(equalToConstant: 242),
             card.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             card.topAnchor.constraint(equalTo: viewForAnimation.bottomAnchor, constant: 22),
+            
+            ball.bottomAnchor.constraint(equalTo: floorImage.bottomAnchor, constant: 40),
+            ball.widthAnchor.constraint(equalToConstant: 64),
+            ball.heightAnchor.constraint(equalToConstant: 64),
             
             
             buttonNewFact.topAnchor.constraint(equalTo: card.bottomAnchor, constant: 16),
@@ -154,6 +169,10 @@ class FactsView: UIView {
             
         ])
         
+    }
+    
+    @objc func handlePan(sender: UIPanGestureRecognizer) {
+        delegate?.handlePan(sender: sender)
     }
     
     
