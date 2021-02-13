@@ -19,14 +19,33 @@ class FavoriteView: UIView {
         return collectionView
     }()
     
+    lazy var placeholder: UILabel = {
+        let placeholder = UILabel()
+        placeholder.font = UIFont.vartaRegular
+        placeholder.text = "Favorite a fact and it will be shown here"
+        placeholder.numberOfLines = 10
+        placeholder.textColor = .purpleAction
+        placeholder.textAlignment = .center
+        placeholder.numberOfLines = 20
+        placeholder.font = placeholder.font.withSize(23)
+        placeholder.translatesAutoresizingMaskIntoConstraints = false
+        return placeholder
+    }()
+    
+    
     func setUpConstraints() {
         self.addSubview(collectionView)
+        self.addSubview(placeholder)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            placeholder.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
+            placeholder.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            placeholder.widthAnchor.constraint(equalToConstant: 250)
         ])
     }
     
