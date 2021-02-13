@@ -22,6 +22,13 @@ class FactsView: UIView {
         return view
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .yellowPrimary
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     lazy var viewForLeftEyeAnimation: UIView = {
         let view = UIView(frame: CGRect(x: 193.5, y: 125.7, width: 15.23, height: 11.11))
         view.backgroundColor = .clear
@@ -73,7 +80,7 @@ class FactsView: UIView {
     
     
     lazy var ball: UIImageView = {
-        let view = UIImageView(frame: CGRect(x: 200, y: viewForAnimation.bounds.minY, width: 64, height: 64))
+        let view = UIImageView(frame: CGRect(x: viewForAnimation.bounds.maxX, y: viewForAnimation.bounds.maxY , width: 64, height: 64))
         view.image = UIImage(named: "ball")
         let panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
         view.addGestureRecognizer(panGestureRecognizer)
@@ -82,15 +89,6 @@ class FactsView: UIView {
         return view
         
     }()
-    
-    lazy var eyes: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "eyes")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-        
-    }()
-    
     
     
     lazy var card: UICollectionView = {
@@ -128,6 +126,7 @@ class FactsView: UIView {
         self.addSubview(buttonNewFact)
         viewForAnimation.addSubview(ball)
         animationImage.addSubview(viewForEyes)
+        card.addSubview(activityIndicator)
         
         
         NSLayoutConstraint.activate([
@@ -166,6 +165,9 @@ class FactsView: UIView {
             buttonNewFact.widthAnchor.constraint(equalToConstant: 138),
             buttonNewFact.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             buttonNewFact.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: card.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: card.centerYAnchor)
             
         ])
         
