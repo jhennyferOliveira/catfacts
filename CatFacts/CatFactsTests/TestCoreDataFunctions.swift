@@ -20,7 +20,7 @@ class TestCoreDataFunctions: XCTestCase {
     func testSaveFact() {
         let totalFactsBeforeSaving = sut?.getAll(context: mockPersistantContainer.viewContext)
         let fact = Fact(fact: "some fact", length: 200)
-        sut?.saveFact(fact: fact, context: mockPersistantContainer.viewContext)
+        _ = sut?.saveFact(fact: fact, context: mockPersistantContainer.viewContext)
         saveInContextMock()
         let totalFactsAfterSaving = sut?.getAll(context: mockPersistantContainer.viewContext)
         guard let totalFactsBefore = totalFactsBeforeSaving else {return}
