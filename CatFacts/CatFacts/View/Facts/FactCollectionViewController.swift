@@ -18,8 +18,8 @@ class FactCollectionViewController: UIViewController {
     var gravity: UIGravityBehavior!
     var collision: UICollisionBehavior!
     var ball: UIImageView?
-    var leftPupil: UIImageView?
-    
+    var activityIndicator: UIActivityIndicatorView?
+    let impact = UIImpactFeedbackGenerator()
     
     private let viewModelFact = ViewModelFact()
     private let viewModelFavorite = ViewModelFavorite()
@@ -34,14 +34,14 @@ class FactCollectionViewController: UIViewController {
         factView.card.delegate = self
         factView.card.dataSource = self
         factView.controller = self
+        factView.delegate = self
         self.collectionView = factView.card
         self.button = factView.buttonNewFact
-        button?.addTarget(self, action: #selector(newFactButton), for: .touchUpInside)
-        factView.delegate = self
         self.ball = factView.ball
         self.viewForAnimation = factView.viewForAnimation
-        self.leftPupil = factView.leftPupil
+        self.activityIndicator = factView.activityIndicator
         self.view = factView
+        button?.addTarget(self, action: #selector(newFactButton), for: .touchUpInside)
         overrideUserInterfaceStyle = .light
         
         getData()
@@ -49,29 +49,55 @@ class FactCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        animator = UIDynamicAnimator(referenceView: viewForAnimation! )
-        gravity = UIGravityBehavior(items: [self.ball!])
-        gravity.magnitude = 1
-        animator.addBehavior(gravity)
-        
-        itemBehaviour = UIDynamicItemBehavior(items: [self.ball!])
-        itemBehaviour.elasticity = 0.8
-        animator.addBehavior(itemBehaviour)
-        
-        collision = UICollisionBehavior(items: [self.ball!])
-        collision.translatesReferenceBoundsIntoBoundary = true
-        animator.addBehavior(collision)
-        
+        setUpAnimation()
+        activityIndicator?.startAnimating()
     }
     
-    @objc func newFactButton() {
+    func setUpAnimation() {
+        guard let viewForAnimation = viewForAnimation else {return}
+        guard let ball = ball else {return}
+        
+        animator = UIDynamicAnimator(referenceView: viewForAnimation )
+        gravity = UIGravityBehavior(items: [ball])
+        gravity.magnitude = 1
+        animator.addBehavior(gravity)
+
+        itemBehaviour = UIDynamicItemBehavior(items: [ball])
+        itemBehaviour.elasticity = 0.8
+        itemBehaviour.angularResistance = 0
+        animator.addBehavior(itemBehaviour)
+
+        collision = UICollisionBehavior(items: [ball])
+        collision.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(collision)
+ 
+    }
+    
+    
+    @objc func newFactButton(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+
+        UIView.animate( withDuration: 0.5,
+                        delay: 0,
+                        usingSpringWithDamping: CGFloat(0.10),
+                        initialSpringVelocity: CGFloat(1.0),
+                        options: UIView.AnimationOptions.allowUserInteraction,
+                        animations: {
+                                      sender.transform = CGAffineTransform.identity },
+                        completion: { Void in() })
         getData()
     }
     
     func getData() {
+        activityIndicator?.startAnimating()
+        let fact1 = Fact(fact: "", length: 2)
+        self.viewModelFact.fact = fact1
+        
+        self.collectionView?.reloadData()
         viewModelFact.getFact { fact in
             DispatchQueue.main.async {
                 self.viewModelFact.fact = fact
+                self.activityIndicator?.stopAnimating()
                 self.collectionView?.reloadData()
             }
         }
@@ -82,35 +108,43 @@ extension FactCollectionViewController: HandlePanGestureDelegate {
     
     func handlePan(sender: UIPanGestureRecognizer) {
         
-        let location = sender.location(in: viewForAnimation);
-        let touchLocation = sender.location(in: self.ball);
+        guard let viewForAnimation = viewForAnimation else {return}
+        guard let ball = ball else {return}
+        let location = sender.location(in: viewForAnimation)
         
-        if sender.state == UIGestureRecognizer.State.began {
-         
-            self.animator!.removeAllBehaviors()
+        // checks if the location where user is panning inside the view's frame
+        if viewForAnimation.frame.contains(location) {
+                
+            if sender.state == UIGestureRecognizer.State.began {
+                // while user is touching the collision and gravity effects are removed and the attachment behavior is add so the ball can move with user's motion
+                animator.removeBehavior(collision)
+                animator.removeBehavior(gravity)
+                attachmentBehavior = UIAttachmentBehavior(item: ball, attachedToAnchor: location)
+                animator.addBehavior(attachmentBehavior)
+            }
             
-            let offset = UIOffset(horizontal: touchLocation.x - self.ball!.bounds.midX, vertical: touchLocation.y - self.ball!.bounds.midY)
- 
-            self.attachmentBehavior = UIAttachmentBehavior(item: self.ball!, offsetFromCenter: offset, attachedToAnchor: location)
-            self.animator!.addBehavior(self.attachmentBehavior);
+            else if sender.state == UIGestureRecognizer.State.changed {
+                // set the anchor point of attachment behavior
+               attachmentBehavior.anchorPoint = location
+                
+                
+            }
+            else if sender.state == UIGestureRecognizer.State.ended {
+                // remove the attachement behavior so the ball can have the movement of collision and gravity
+                animator.removeBehavior(attachmentBehavior)
+                itemBehaviour.addLinearVelocity(sender.velocity(in: viewForAnimation), for: ball)
+                animator.addBehavior(itemBehaviour)
+                animator.addBehavior(gravity)
+                animator.addBehavior(collision)
+            }
+            
+        }
+        else {
+            // if user drags the ball out of the view will be collision and the attachement behavior will be removed so the user can't move the ball outside the view
+            animator.addBehavior(collision)
+            animator.removeBehavior(attachmentBehavior)
         }
         
-        else if sender.state == UIGestureRecognizer.State.changed {
-            self.attachmentBehavior!.anchorPoint = location;
-            
-        }
-        else if sender.state == UIGestureRecognizer.State.ended {
-         
-            self.animator!.removeBehavior(self.attachmentBehavior)
-            itemBehaviour = UIDynamicItemBehavior(items: [self.ball!])
-            itemBehaviour.addLinearVelocity(sender.velocity(in: self.viewForAnimation), for: self.ball!)
-            itemBehaviour.angularResistance = 0
-            itemBehaviour.elasticity = 0.8
-            animator.addBehavior(itemBehaviour)
-            self.animator.addBehavior(self.gravity)
-            self.animator.addBehavior(self.collision)
-        }
-
     }
 }
 
@@ -122,14 +156,11 @@ extension FactCollectionViewController: FavoriteButtonActionsDelegate {
     }
     
     func updateFavButton(isFavorite: Bool, button: UIButton) {
+        impact.impactOccurred()
         if viewModelFavorite.isFavorite {
-            
             button.setImage(UIImage(named: "heartFill"), for: .normal)
-            
             guard let fact = viewModelFact.fact else {return}
             viewModelFact.save(fact: fact )
-            
-            
         } else {
             
             button.setImage(UIImage(named: "heartEmpty"), for: .normal)
@@ -139,7 +170,6 @@ extension FactCollectionViewController: FavoriteButtonActionsDelegate {
             
             for favorite in favoriteFacts{
                 if favorite.favoriteText == fact.fact {
-                    print(viewModelFavorite.getAll().count)
                     guard let id = favorite.id else {return}
                     viewModelFavorite.deleteItem(id: id)
                 }
@@ -165,6 +195,7 @@ extension FactCollectionViewController: UICollectionViewDataSource, UICollection
         factCell.cardLabel.text = viewModelFact.fact?.fact
         factCell.buttonFavorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
         factCell.delegate = self
+
         
         return factCell
     }
