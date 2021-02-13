@@ -6,27 +6,91 @@
 //
 
 import XCTest
+import CoreData
+@testable import CatFacts
 
 class ViewModelFavoriteTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var sut: ViewModelFavorite?
+    
+    func testSave() {
+        sut = ViewModelFavorite()
+        let fact = Fact(fact: "fact 1", length: 12)
+        sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
+        let allFacts = sut?.getAll(context: mockPersistantContainer.viewContext)
+        guard let facts = allFacts else {return}
+        for item in facts {
+            if item.favoriteText == fact.fact {
+                XCTAssertTrue(item.favoriteText == fact.fact)
+            }
+          
+        }
+        
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testGet() {
+        sut = ViewModelFavorite()
+        guard let factsBeforeSaving = sut?.getAll(context: mockPersistantContainer.viewContext) else {return}
+        let fact = Fact(fact: "fact 2", length: 12)
+        sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
+        guard let factsAfterSaving = sut?.getAll(context: mockPersistantContainer.viewContext) else {return}
+        
+        XCTAssertTrue(factsAfterSaving.count == factsBeforeSaving.count + 1)
+        
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testDelete() {
+        sut = ViewModelFavorite()
+        
+        let fact = Fact(fact: "fact 3", length: 12)
+        sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
+        guard let factsBeforeDeleting = sut?.getAll(context: mockPersistantContainer.viewContext) else {return}
+        for item in factsBeforeDeleting {
+            if item.favoriteText == fact.fact {
+                guard let id = item.id else {return}
+                sut?.deleteItem(id: id, context: mockPersistantContainer.viewContext)
+            }
+        }
+        
+        guard let factsAfterDeleting = sut?.getAll(context: mockPersistantContainer.viewContext) else {return}
+        
+        XCTAssertTrue(factsAfterDeleting.count == factsBeforeDeleting.count - 1 )
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    //MARK: mock in-memory persistant store
+    lazy var managedObjectModel: NSManagedObjectModel = {
+        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))] )!
+        return managedObjectModel
+    }()
+    
+    lazy var mockPersistantContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "CatFacts", managedObjectModel: self.managedObjectModel)
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+        description.shouldAddStoreAsynchronously = false // Make it simpler in test env
+        
+        container.persistentStoreDescriptions = [description]
+        container.loadPersistentStores { (description, error) in
+            // Check if the data store is in memory
+            precondition( description.type == NSInMemoryStoreType )
+            
+            // Check if creating container wrong
+            if let error = error {
+                fatalError("Create an in-mem coordinator failed \(error)")
+            }
+        }
+        return container
+    }()
+    
+    func saveInContextMock() {
+        do {
+            try mockPersistantContainer.viewContext.save()
+        }  catch {
+            print("create fakes error \(error)")
         }
     }
+    
 
 }
+
