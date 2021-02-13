@@ -7,11 +7,11 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-class ViewModelFact {
+public class ViewModelFact {
     let service = APIHandler()
     let persistenceService = CoreDataFunctions()
-    
     var fact: Fact?
 
     //MARK:- API
@@ -21,15 +21,15 @@ class ViewModelFact {
     
     //MARK:- COREDATA
     
-    func save(fact: Fact) {
-        _ = persistenceService.saveFact(fact: fact)
+    func save(fact: Fact, context: NSManagedObjectContext = AppDelegate.viewContext ) {
+        _ = persistenceService.saveFact(fact: fact, context: context)
     }
     
-    func deleteItem(id: UUID) {
-        persistenceService.delete(id: id)
+    func deleteItem(id: UUID, context: NSManagedObjectContext = AppDelegate.viewContext) {
+        persistenceService.delete(id: id, context: context)
     }
     
-    func getAll() -> [Favorite] {
-        return persistenceService.getAll()
+    func getAll(context: NSManagedObjectContext = AppDelegate.viewContext) -> [Favorite] {
+        return persistenceService.getAll(context: context)
     }
 }
