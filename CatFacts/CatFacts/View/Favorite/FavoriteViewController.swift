@@ -11,8 +11,9 @@ import UIKit
 class FavoriteViewController: UIViewController, UICollectionViewDelegate {
     
     let viewModelFavorite = ViewModelFavorite()
-    
     var collectionView: UICollectionView?
+    var placeholder: UILabel?
+    let impact = UIImpactFeedbackGenerator()
     
     override func viewWillAppear(_ animated: Bool) {
         getData()
@@ -24,6 +25,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
         favoriteView.collectionView.dataSource = self
         favoriteView.controller = self
         collectionView = favoriteView.collectionView
+        placeholder = favoriteView.placeholder
         self.view = favoriteView
         overrideUserInterfaceStyle = .light
         
@@ -37,13 +39,19 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
 
 extension FavoriteViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        if viewModelFavorite.favoriteFacts?.count == 0 {
+            placeholder?.isHidden = false
+        } else {
+            placeholder?.isHidden = true
+        }
         return viewModelFavorite.favoriteFacts?.count ?? 0
         
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      
+        
         guard let factCell  = collectionView.dequeueReusableCell(withReuseIdentifier: FactCell.identifier, for: indexPath) as? FactCell else { fatalError() }
         
         factCell.delegate = self
@@ -57,6 +65,7 @@ extension FavoriteViewController: UICollectionViewDataSource {
 
 extension FavoriteViewController: FavoriteButtonActionsDelegate {
     func favButtonAction(button: UIButton) {
+        impact.impactOccurred()
         viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
         let favoriteFacts = viewModelFavorite.favoriteFacts
         guard let id = favoriteFacts?[button.tag].id else {return}
