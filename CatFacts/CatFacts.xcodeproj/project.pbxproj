@@ -134,6 +134,7 @@
 		EF1FEE5225CD6B5A00A23358 /* CatFacts */ = {
 			isa = PBXGroup;
 			children = (
+				EF5E490726C700FE00B2F24C /* Controller */,
 				EFA26A6F25D1806500E97AF7 /* Service */,
 				EF1FEEBF25CD895600A23358 /* Extension */,
 				EF1FEE8E25CD6EBD00A23358 /* Config */,
@@ -187,31 +188,12 @@
 		EF1FEE8B25CD6E8A00A23358 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EFA4109D25D4491E00DF7841 /* LaunchScreen */,
-				EFA4109C25D4491000DF7841 /* TabBar */,
-				EFA26A5A25CFA36200E97AF7 /* FactCell */,
-				EF1FEE8D25CD6EAA00A23358 /* Favorite */,
-				EF1FEE8C25CD6E9700A23358 /* Facts */,
+				EF1FEE6125CD6B5B00A23358 /* LaunchScreen.storyboard */,
+				EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */,
+				EF1FEE9525CD6F2A00A23358 /* FavoriteView.swift */,
+				EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		EF1FEE8C25CD6E9700A23358 /* Facts */ = {
-			isa = PBXGroup;
-			children = (
-				EF1FEE9D25CD6F3A00A23358 /* FactsView.swift */,
-				EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */,
-			);
-			path = Facts;
-			sourceTree = "<group>";
-		};
-		EF1FEE8D25CD6EAA00A23358 /* Favorite */ = {
-			isa = PBXGroup;
-			children = (
-				EF1FEE9525CD6F2A00A23358 /* FavoriteView.swift */,
-				EFA26A6725D0E9FD00E97AF7 /* FavoriteViewController.swift */,
-			);
-			path = Favorite;
 			sourceTree = "<group>";
 		};
 		EF1FEE8E25CD6EBD00A23358 /* Config */ = {
@@ -233,12 +215,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		EFA26A5A25CFA36200E97AF7 /* FactCell */ = {
+		EF5E490726C700FE00B2F24C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */,
+				EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */,
+				EFA26A6725D0E9FD00E97AF7 /* FavoriteViewController.swift */,
+				EFA26A5225CFA35500E97AF7 /* FactCollectionViewController.swift */,
 			);
-			path = FactCell;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		EFA26A6F25D1806500E97AF7 /* Service */ = {
@@ -258,22 +242,6 @@
 				EFB6835F25D2B54300E107FA /* Favorite+CoreDataProperties.swift */,
 			);
 			path = CoreDataModel;
-			sourceTree = "<group>";
-		};
-		EFA4109C25D4491000DF7841 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */,
-			);
-			path = TabBar;
-			sourceTree = "<group>";
-		};
-		EFA4109D25D4491E00DF7841 /* LaunchScreen */ = {
-			isa = PBXGroup;
-			children = (
-				EF1FEE6125CD6B5B00A23358 /* LaunchScreen.storyboard */,
-			);
-			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
