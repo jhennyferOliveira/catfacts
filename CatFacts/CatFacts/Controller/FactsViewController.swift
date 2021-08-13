@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class FactCollectionViewController: UIViewController {
+class FactsViewController: UIViewController {
     
     var itemBehaviour: UIDynamicItemBehavior!
     var animator: UIDynamicAnimator!
@@ -104,7 +104,7 @@ class FactCollectionViewController: UIViewController {
     }
 }
 
-extension FactCollectionViewController: HandlePanGestureDelegate {
+extension FactsViewController: HandlePanGestureDelegate {
     
     func handlePan(sender: UIPanGestureRecognizer) {
         
@@ -148,7 +148,7 @@ extension FactCollectionViewController: HandlePanGestureDelegate {
     }
 }
 
-extension FactCollectionViewController: FavoriteButtonActionsDelegate {
+extension FactsViewController: FavoriteButtonActionsDelegate {
     
     func favButtonAction(button: UIButton) {
         viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
@@ -181,7 +181,7 @@ extension FactCollectionViewController: FavoriteButtonActionsDelegate {
 
 
 
-extension FactCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension FactsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }

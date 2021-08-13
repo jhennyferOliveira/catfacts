@@ -13,9 +13,9 @@ protocol FavoriteButtonActionsDelegate {
 }
 
 class FactCell: UICollectionViewCell {
-   
-    
-    var factCollectionViewController: FactCollectionViewController?
+       
+    var factsViewController: FactsViewController?
+    var favoriteViewController: FavoriteViewController?
     var delegate: FavoriteButtonActionsDelegate?
     static let identifier = "factCell"
     
