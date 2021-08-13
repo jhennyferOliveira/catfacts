@@ -17,7 +17,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let item1 = FactCollectionViewController()
+        let item1 = FactsViewController()
         let icon1 = UITabBarItem(title: "Cat Facts", image: UIImage(systemName: "newspaper.fill")?.withTintColor(.gray, renderingMode: .alwaysOriginal), selectedImage: UIImage(systemName: "newspaper.fill")?.withTintColor(.purpleAction, renderingMode: .alwaysOriginal))
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.purpleAction], for: .selected)

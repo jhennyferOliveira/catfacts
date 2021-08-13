@@ -13,7 +13,7 @@ protocol HandlePanGestureDelegate {
 }
 
 class FactsView: UIView {
-    var controller: FactCollectionViewController?
+    var controller: FactsViewController?
     var delegate: HandlePanGestureDelegate?
     lazy var viewForAnimation: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 283))
