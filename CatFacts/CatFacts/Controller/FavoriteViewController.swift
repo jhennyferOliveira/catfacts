@@ -10,7 +10,7 @@ import UIKit
 
 class FavoriteViewController: UIViewController, UICollectionViewDelegate {
     
-    let viewModelFavorite = ViewModelFavorite()
+    let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
     var collectionView: UICollectionView?
     var placeholder: UILabel?
     let impact = UIImpactFeedbackGenerator()
@@ -54,7 +54,7 @@ extension FavoriteViewController: UICollectionViewDataSource {
         
         guard let factCell  = collectionView.dequeueReusableCell(withReuseIdentifier: FactCell.identifier, for: indexPath) as? FactCell else { fatalError() }
         
-        factCell.delegate = self
+        factCell.delegateFavorite = self
         factCell.cardLabel.text = viewModelFavorite.favoriteFacts?[indexPath.item  ].favoriteText
         factCell.buttonFavorite.setImage(UIImage(named: "heartFill"), for: .normal)
         factCell.buttonFavorite.tag = indexPath.row
@@ -63,8 +63,9 @@ extension FavoriteViewController: UICollectionViewDataSource {
     }
 }
 
-extension FavoriteViewController: FavoriteButtonActionsDelegate {
-    func favButtonAction(button: UIButton) {
+extension FavoriteViewController: FavoriteButtonActionsDelegateFavoriteView {
+
+    func favButtonActionFavoriteView(button: UIButton) {
         impact.impactOccurred()
         viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
         let favoriteFacts = viewModelFavorite.favoriteFacts

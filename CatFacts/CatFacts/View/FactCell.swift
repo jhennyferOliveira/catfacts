@@ -8,15 +8,19 @@
 import Foundation
 import UIKit
 
-protocol FavoriteButtonActionsDelegate {
-    func favButtonAction(button: UIButton)
+protocol FavoriteButtonActionsDelegateFactView {
+    func favButtonActionFactsView(button: UIButton)
 }
 
+protocol FavoriteButtonActionsDelegateFavoriteView {
+    func favButtonActionFavoriteView(button: UIButton)
+}
 class FactCell: UICollectionViewCell {
        
     var factsViewController: FactsViewController?
     var favoriteViewController: FavoriteViewController?
-    var delegate: FavoriteButtonActionsDelegate?
+    var delegateFacts: FavoriteButtonActionsDelegateFactView?
+    var delegateFavorite: FavoriteButtonActionsDelegateFavoriteView?
     static let identifier = "factCell"
     
     lazy var cardLabel: UILabel = {
@@ -34,7 +38,8 @@ class FactCell: UICollectionViewCell {
         let buttonFavorite = UIButton()
         
         buttonFavorite.setImage(UIImage(named: "heartEmpty")?.withTintColor(.redAction, renderingMode: .alwaysOriginal), for: .normal)
-        buttonFavorite .addTarget(self, action: #selector(buttonFavTouchUpInside), for: .touchUpInside)
+        buttonFavorite .addTarget(self, action: #selector(buttonFavFactsView), for: .touchUpInside)
+        buttonFavorite .addTarget(self, action: #selector(buttonFavFavoriteView), for: .touchUpInside)
         buttonFavorite.contentMode = .scaleAspectFit
         buttonFavorite.translatesAutoresizingMaskIntoConstraints = false
         
@@ -61,8 +66,11 @@ class FactCell: UICollectionViewCell {
         ])
     }
     
-    @objc func buttonFavTouchUpInside(button: UIButton) {
-        delegate?.favButtonAction(button: buttonFavorite)
+    @objc func buttonFavFactsView(button: UIButton) {
+        delegateFacts?.favButtonActionFactsView(button: buttonFavorite)
+    }
+    @objc func buttonFavFavoriteView(button: UIButton) {
+        delegateFavorite?.favButtonActionFavoriteView(button: buttonFavorite)
     }
     
     override init(frame: CGRect) {
