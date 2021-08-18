@@ -22,7 +22,7 @@ class FactsViewController: UIViewController {
     let impact = UIImpactFeedbackGenerator()
     
     private let viewModelFact = ViewModelFact()
-    private let viewModelFavorite = ViewModelFavorite()
+    private let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
     var button: UIButton?
     var favorite: Favorite?
     var collectionView: UICollectionView?
@@ -47,6 +47,10 @@ class FactsViewController: UIViewController {
         getData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        self.collectionView?.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAnimation()
@@ -61,29 +65,29 @@ class FactsViewController: UIViewController {
         gravity = UIGravityBehavior(items: [ball])
         gravity.magnitude = 1
         animator.addBehavior(gravity)
-
+        
         itemBehaviour = UIDynamicItemBehavior(items: [ball])
         itemBehaviour.elasticity = 0.8
         itemBehaviour.angularResistance = 0
         animator.addBehavior(itemBehaviour)
-
+        
         collision = UICollisionBehavior(items: [ball])
         collision.translatesReferenceBoundsIntoBoundary = true
         animator.addBehavior(collision)
- 
+        
     }
     
     
     @objc func newFactButton(sender: UIButton) {
         sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-
+        
         UIView.animate( withDuration: 0.5,
                         delay: 0,
                         usingSpringWithDamping: CGFloat(0.10),
                         initialSpringVelocity: CGFloat(1.0),
                         options: UIView.AnimationOptions.allowUserInteraction,
                         animations: {
-                                      sender.transform = CGAffineTransform.identity },
+                            sender.transform = CGAffineTransform.identity },
                         completion: { Void in() })
         getData()
     }
@@ -114,7 +118,7 @@ extension FactsViewController: HandlePanGestureDelegate {
         
         // checks if the location where user is panning inside the view's frame
         if viewForAnimation.frame.contains(location) {
-                
+            
             if sender.state == UIGestureRecognizer.State.began {
                 // while user is touching the collision and gravity effects are removed and the attachment behavior is add so the ball can move with user's motion
                 animator.removeBehavior(collision)
@@ -125,7 +129,7 @@ extension FactsViewController: HandlePanGestureDelegate {
             
             else if sender.state == UIGestureRecognizer.State.changed {
                 // set the anchor point of attachment behavior
-               attachmentBehavior.anchorPoint = location
+                attachmentBehavior.anchorPoint = location
                 
                 
             }
@@ -148,21 +152,15 @@ extension FactsViewController: HandlePanGestureDelegate {
     }
 }
 
-extension FactsViewController: FavoriteButtonActionsDelegate {
+extension FactsViewController: FavoriteButtonActionsDelegateFactView {
     
-    func favButtonAction(button: UIButton) {
+    func favButtonActionFactsView(button: UIButton) {
         viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
-        updateFavButton(isFavorite: viewModelFavorite.isFavorite, button: button)
-    }
-    
-    func updateFavButton(isFavorite: Bool, button: UIButton) {
-        impact.impactOccurred()
         if viewModelFavorite.isFavorite {
             button.setImage(UIImage(named: "heartFill"), for: .normal)
             guard let fact = viewModelFact.fact else {return}
             viewModelFact.save(fact: fact )
         } else {
-            
             button.setImage(UIImage(named: "heartEmpty"), for: .normal)
             guard let fact = viewModelFact.fact else {return}
             
@@ -174,7 +172,6 @@ extension FactsViewController: FavoriteButtonActionsDelegate {
                     viewModelFavorite.deleteItem(id: id)
                 }
             }
-            
         }
     }
 }
@@ -193,9 +190,15 @@ extension FactsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         
         factCell.cardLabel.text = viewModelFact.fact?.fact
-        factCell.buttonFavorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
-        factCell.delegate = self
+        
+        if viewModelFavorite.isFavorite {
+            factCell.buttonFavorite.setImage(UIImage(named: "heartFill"), for: .normal)
+        } else {
+            factCell.buttonFavorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
+        }
 
+        factCell.delegateFacts = self
+        
         
         return factCell
     }
