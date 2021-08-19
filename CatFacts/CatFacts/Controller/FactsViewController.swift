@@ -152,9 +152,9 @@ extension FactsViewController: HandlePanGestureDelegate {
     }
 }
 
-extension FactsViewController: FavoriteButtonActionsDelegateFactView {
+extension FactsViewController: FavoriteButtonActionDelegateToFactController {
     
-    func favButtonActionFactsView(button: UIButton) {
+    func updateFavoriteButtonState(button: UIButton) {
         viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
         if viewModelFavorite.isFavorite {
             button.setImage(UIImage(named: "heartFill"), for: .normal)
@@ -189,15 +189,15 @@ extension FactsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             fatalError();
         }
         
-        factCell.cardLabel.text = viewModelFact.fact?.fact
+        factCell.fact.text = viewModelFact.fact?.fact
         
         if viewModelFavorite.isFavorite {
-            factCell.buttonFavorite.setImage(UIImage(named: "heartFill"), for: .normal)
+            factCell.favorite.setImage(UIImage(named: "heartFill"), for: .normal)
         } else {
-            factCell.buttonFavorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
+            factCell.favorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
         }
 
-        factCell.delegateFacts = self
+        factCell.delegateFactController = self
         
         
         return factCell
