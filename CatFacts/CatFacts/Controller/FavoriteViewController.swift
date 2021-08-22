@@ -10,7 +10,7 @@ import UIKit
 
 class FavoriteViewController: UIViewController, UICollectionViewDelegate {
     
-    let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
+    let viewModelFavorite = ViewModelFavorite.sharedInstance
     var collectionView: UICollectionView?
     var placeholder: UILabel?
     let impact = UIImpactFeedbackGenerator()
@@ -32,19 +32,19 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
     }
     
     func getData() {
-        viewModelFavorite.favoriteFacts = viewModelFavorite.getAll()
+        viewModelFavorite.favoritedFacts = viewModelFavorite.getAll()
         self.collectionView?.reloadData()
     }
 }
 
 extension FavoriteViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if viewModelFavorite.favoriteFacts?.count == 0 {
+        if viewModelFavorite.favoritedFacts?.count == 0 {
             placeholder?.isHidden = false
         } else {
             placeholder?.isHidden = true
         }
-        return viewModelFavorite.favoriteFacts?.count ?? 0
+        return viewModelFavorite.favoritedFacts?.count ?? 0
         
     }
     
@@ -55,7 +55,7 @@ extension FavoriteViewController: UICollectionViewDataSource {
         guard let factCell  = collectionView.dequeueReusableCell(withReuseIdentifier: FactCell.identifier, for: indexPath) as? FactCell else { fatalError() }
         
         factCell.delegateFavoriteController = self
-        factCell.fact.text = viewModelFavorite.favoriteFacts?[indexPath.item  ].favoriteText
+        factCell.fact.text = viewModelFavorite.favoritedFacts?[indexPath.item  ].favoriteText
         factCell.favorite.setImage(UIImage(named: "heartFill"), for: .normal)
         factCell.favorite.tag = indexPath.row
         return factCell
@@ -67,8 +67,8 @@ extension FavoriteViewController: FavoriteButtonActionDelegateToFavoriteControll
 
     func removeFavoritedFactFromFavoriteView(button: UIButton) {
         impact.impactOccurred()
-        viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
-        let favoriteFacts = viewModelFavorite.favoriteFacts
+        viewModelFavorite.currentFactIsFavorite = !viewModelFavorite.currentFactIsFavorite
+        let favoriteFacts = viewModelFavorite.favoritedFacts
         guard let id = favoriteFacts?[button.tag].id else {return}
         viewModelFavorite.deleteItem(id:id)
         getData()

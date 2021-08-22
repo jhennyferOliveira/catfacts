@@ -10,10 +10,12 @@ import UIKit
 import CoreData
 
 class ViewModelFavorite {
-    static let sharedViewModelFavorite = ViewModelFavorite()
+    
+    static let sharedInstance = ViewModelFavorite()
     let persistenceService = CoreDataFunctions(container: AppDelegate.persistentContainer)
-    var favoriteFacts: [Favorite]?
-    var isFavorite: Bool = false
+    var favoritedFacts: [Favorite]?
+    var currentFactIsFavorite: Bool = false
+    
     //MARK:- COREDATA
     
     func save(fact: Fact, context: NSManagedObjectContext = AppDelegate.viewContext ) {

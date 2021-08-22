@@ -22,7 +22,7 @@ class FactsViewController: UIViewController {
     let impact = UIImpactFeedbackGenerator()
     
     private let viewModelFact = ViewModelFact()
-    private let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
+    private let viewModelFavorite = ViewModelFavorite.sharedInstance
     var button: UIButton?
     var favorite: Favorite?
     var collectionView: UICollectionView?
@@ -155,8 +155,8 @@ extension FactsViewController: HandlePanGestureDelegate {
 extension FactsViewController: FavoriteButtonActionDelegateToFactController {
     
     func updateFavoriteButtonState(button: UIButton) {
-        viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
-        if viewModelFavorite.isFavorite {
+        viewModelFavorite.currentFactIsFavorite = !viewModelFavorite.currentFactIsFavorite
+        if viewModelFavorite.currentFactIsFavorite {
             button.setImage(UIImage(named: "heartFill"), for: .normal)
             guard let fact = viewModelFact.lastFechedFact else {return}
             viewModelFact.save(fact: fact )
@@ -191,7 +191,7 @@ extension FactsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         factCell.fact.text = viewModelFact.lastFechedFact?.fact
         
-        if viewModelFavorite.isFavorite {
+        if viewModelFavorite.currentFactIsFavorite {
             factCell.favorite.setImage(UIImage(named: "heartFill"), for: .normal)
         } else {
             factCell.favorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
