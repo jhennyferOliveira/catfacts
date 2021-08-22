@@ -12,7 +12,7 @@ import CoreData
 class ViewModelFavorite {
     
     static let sharedInstance = ViewModelFavorite()
-    let persistenceService = CoreDataFunctions(container: AppDelegate.persistentContainer)
+    let persistenceService = DataPersistenceOperator(container: AppDelegate.persistentContainer)
     var favoritedFacts: [Favorite]?
     var currentFactIsFavorite: Bool = false
     

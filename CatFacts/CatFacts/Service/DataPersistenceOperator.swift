@@ -8,12 +8,11 @@
 import Foundation
 import CoreData
 
-public class CoreDataFunctions {
+public class DataPersistenceOperator {
     
     let context = AppDelegate.viewContext
     
-    init(container: NSPersistentContainer = AppDelegate.persistentContainer) {
-    }
+    init(container: NSPersistentContainer = AppDelegate.persistentContainer) {}
     
     func save(){
         do {
@@ -30,7 +29,6 @@ public class CoreDataFunctions {
         save()
         return object
     }
-    
 
     func delete(id: UUID, context: NSManagedObjectContext = AppDelegate.viewContext ) {
         let favorites = getAll(context: context)

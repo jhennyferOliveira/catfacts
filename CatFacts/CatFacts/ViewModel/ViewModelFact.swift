@@ -12,7 +12,7 @@ import CoreData
 public class ViewModelFact {
     
     let service = APIRequester()
-    let persistenceService = CoreDataFunctions()
+    let persistenceService = DataPersistenceOperator()
     var lastFechedFact: Fact?
 
     //MARK:- API
