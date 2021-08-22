@@ -30,15 +30,15 @@ class FactsViewController: UIViewController {
     var viewForAnimation: UIView?
     
     override func loadView() {
-        let factView = FactsView()
-        factView.card.delegate = self
-        factView.card.dataSource = self
+        let factView = FactView()
+        factView.factCard.delegate = self
+        factView.factCard.dataSource = self
         factView.controller = self
         factView.delegate = self
-        self.collectionView = factView.card
+        self.collectionView = factView.factCard
         self.button = factView.buttonNewFact
         self.ball = factView.ball
-        self.viewForAnimation = factView.viewForAnimation
+        self.viewForAnimation = factView.animationView
         self.activityIndicator = factView.activityIndicator
         self.view = factView
         button?.addTarget(self, action: #selector(newFactButton), for: .touchUpInside)
@@ -110,7 +110,7 @@ class FactsViewController: UIViewController {
 
 extension FactsViewController: HandlePanGestureDelegate {
     
-    func handlePan(sender: UIPanGestureRecognizer) {
+    func handlePanGesture(sender: UIPanGestureRecognizer) {
         
         guard let viewForAnimation = viewForAnimation else {return}
         guard let ball = ball else {return}
