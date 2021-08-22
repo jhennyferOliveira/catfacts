@@ -170,8 +170,8 @@
 		EF1FEE8925CD6E7B00A23358 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EFE543FF26D2D9D90081D607 /* APIModel */,
 				EFA4109825D4486B00DF7841 /* CoreDataModel */,
-				EF1FEEA725CD6F5900A23358 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +242,14 @@
 				EFB6835F25D2B54300E107FA /* Favorite+CoreDataProperties.swift */,
 			);
 			path = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		EFE543FF26D2D9D90081D607 /* APIModel */ = {
+			isa = PBXGroup;
+			children = (
+				EF1FEEA725CD6F5900A23358 /* Model.swift */,
+			);
+			path = APIModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
