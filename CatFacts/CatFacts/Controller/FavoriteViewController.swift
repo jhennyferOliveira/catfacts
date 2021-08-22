@@ -25,7 +25,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
         favoriteView.collectionView.dataSource = self
         favoriteView.controller = self
         collectionView = favoriteView.collectionView
-        placeholder = favoriteView.placeholder
+        placeholder = favoriteView.placeholderNoFavoritedFacts
         self.view = favoriteView
         overrideUserInterfaceStyle = .light
         
