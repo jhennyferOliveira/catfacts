@@ -9,7 +9,7 @@ import Foundation
 
 class APIHandler {
 
-    func getDataFromAPI(completionHandler: @escaping (Fact) -> Void) {
+    func fetchFactFromAPI(completionHandler: @escaping (Fact) -> Void) {
 
         let path = "https://catfact.ninja/fact?max_length=240"
         

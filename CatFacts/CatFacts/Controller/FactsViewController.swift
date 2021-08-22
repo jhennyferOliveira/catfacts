@@ -95,12 +95,12 @@ class FactsViewController: UIViewController {
     func getData() {
         activityIndicator?.startAnimating()
         let fact1 = Fact(fact: "", length: 2)
-        self.viewModelFact.fact = fact1
+        self.viewModelFact.lastFechedFact = fact1
         
         self.collectionView?.reloadData()
-        viewModelFact.getFact { fact in
+        viewModelFact.fetchFact { fact in
             DispatchQueue.main.async {
-                self.viewModelFact.fact = fact
+                self.viewModelFact.lastFechedFact = fact
                 self.activityIndicator?.stopAnimating()
                 self.collectionView?.reloadData()
             }
@@ -158,11 +158,11 @@ extension FactsViewController: FavoriteButtonActionDelegateToFactController {
         viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
         if viewModelFavorite.isFavorite {
             button.setImage(UIImage(named: "heartFill"), for: .normal)
-            guard let fact = viewModelFact.fact else {return}
+            guard let fact = viewModelFact.lastFechedFact else {return}
             viewModelFact.save(fact: fact )
         } else {
             button.setImage(UIImage(named: "heartEmpty"), for: .normal)
-            guard let fact = viewModelFact.fact else {return}
+            guard let fact = viewModelFact.lastFechedFact else {return}
             
             let favoriteFacts = viewModelFavorite.getAll()
             
@@ -189,7 +189,7 @@ extension FactsViewController: UICollectionViewDataSource, UICollectionViewDeleg
             fatalError();
         }
         
-        factCell.fact.text = viewModelFact.fact?.fact
+        factCell.fact.text = viewModelFact.lastFechedFact?.fact
         
         if viewModelFavorite.isFavorite {
             factCell.favorite.setImage(UIImage(named: "heartFill"), for: .normal)
