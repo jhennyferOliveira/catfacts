@@ -11,13 +11,13 @@ import CoreData
 
 public class ViewModelFact {
     
-    let service = APIHandler()
+    let service = APIRequester()
     let persistenceService = CoreDataFunctions()
     var lastFechedFact: Fact?
 
     //MARK:- API
     func fetchFact(completionHandler: @escaping (Fact) -> Void) {
-        service.fetchFactFromAPI(completionHandler: completionHandler)
+        service.fetchFact(completionHandler: completionHandler)
     }
     
     //MARK:- COREDATA
