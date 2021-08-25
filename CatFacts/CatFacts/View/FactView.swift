@@ -12,9 +12,15 @@ protocol HandlePanGestureDelegate {
     func handlePanGesture(sender: UIPanGestureRecognizer)
 }
 
+protocol NewFactButtonDelegate {
+    func getNewFact(sender: UIButton)
+}
+
 class FactView: UIView {
+    
     var controller: FactsViewController?
-    var delegate: HandlePanGestureDelegate?
+    var delegatePanGesture: HandlePanGestureDelegate?
+    var delegateNewFactButton: NewFactButtonDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -116,12 +122,13 @@ class FactView: UIView {
         return collectionView
     }()
     
-    lazy var buttonNewFact: UIButton = {
+    lazy var newFactButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .purpleAction
         button.setTitle("New fact", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 42/2
+        button.addTarget(self, action: #selector(delegateNewFactButtonAction), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -138,7 +145,7 @@ class FactView: UIView {
     func setUpViewHierarchy() {
         self.addSubview(animationView)
         self.addSubview(factCard)
-        self.addSubview(buttonNewFact)
+        self.addSubview(newFactButton)
         animationView.addSubview(cat)
         animationView.addSubview(floor)
         animationView.addSubview(ball)
@@ -199,11 +206,11 @@ class FactView: UIView {
     
     func setButtonFactConstraints() {
         NSLayoutConstraint.activate([
-            buttonNewFact.topAnchor.constraint(equalTo: factCard.bottomAnchor, constant: 16),
-            buttonNewFact.heightAnchor.constraint(equalToConstant: 42),
-            buttonNewFact.widthAnchor.constraint(equalToConstant: 138),
-            buttonNewFact.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            buttonNewFact.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
+            newFactButton.topAnchor.constraint(equalTo: factCard.bottomAnchor, constant: 16),
+            newFactButton.heightAnchor.constraint(equalToConstant: 42),
+            newFactButton.widthAnchor.constraint(equalToConstant: 138),
+            newFactButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            newFactButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
         ])
     }
     
@@ -215,7 +222,11 @@ class FactView: UIView {
     }
     
     @objc func delegatePanGestureAction(sender: UIPanGestureRecognizer) {
-        delegate?.handlePanGesture(sender: sender)
+        delegatePanGesture?.handlePanGesture(sender: sender)
+    }
+    
+    @objc func delegateNewFactButtonAction(sender: UIButton) {
+        delegateNewFactButton?.getNewFact(sender: sender)
     }
     
 }
