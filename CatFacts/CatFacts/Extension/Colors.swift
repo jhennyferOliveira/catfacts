@@ -17,7 +17,5 @@ extension UIColor {
     
     // button
     static let purpleAction = UIColor(red: 83/255, green: 52/255, blue: 96/255, alpha: 1)
-    
-    
-    
+     
 }

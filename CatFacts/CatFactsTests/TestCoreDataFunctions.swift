@@ -11,10 +11,10 @@ import CoreData
 
 class TestCoreDataFunctions: XCTestCase {
     
-    var sut: CoreDataFunctions?
+    var sut: DataPersistenceOperator?
     
     override func setUp() {
-        sut = CoreDataFunctions(container: mockPersistantContainer)
+        sut = DataPersistenceOperator(container: mockPersistantContainer)
     }
     
     func testSaveFact() {

@@ -7,9 +7,9 @@
 
 import Foundation
 
-class APIHandler {
+class APIRequester {
 
-    func getDataFromAPI(completionHandler: @escaping (Fact) -> Void) {
+    func fetchFact(completionHandler: @escaping (Fact) -> Void) {
 
         let path = "https://catfact.ninja/fact?max_length=240"
         
@@ -25,9 +25,7 @@ class APIHandler {
                     }
                 }
             }.resume()
-            
         }
     }
-    
-    
+ 
 }

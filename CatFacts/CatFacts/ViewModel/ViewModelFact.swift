@@ -10,13 +10,14 @@ import UIKit
 import CoreData
 
 public class ViewModelFact {
-    let service = APIHandler()
-    let persistenceService = CoreDataFunctions()
-    var fact: Fact?
+    
+    let service = APIRequester()
+    let persistenceService = DataPersistenceOperator()
+    var lastFechedFact: Fact?
 
     //MARK:- API
-    func getFact(completionHandler: @escaping (Fact) -> Void) {
-        service.getDataFromAPI(completionHandler: completionHandler)
+    func fetchFact(completionHandler: @escaping (Fact) -> Void) {
+        service.fetchFact(completionHandler: completionHandler)
     }
     
     //MARK:- COREDATA
