@@ -21,8 +21,8 @@ class FactCollectionViewController: UIViewController {
     var activityIndicator: UIActivityIndicatorView?
     let impact = UIImpactFeedbackGenerator()
     
-    private let viewModelFact = ViewModelFact()
-    private let viewModelFavorite = ViewModelFavorite()
+    private let viewModelFact = ViewModelFact.sharedViewModelFact
+    private let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
     var button: UIButton?
     var favorite: Favorite?
     var collectionView: UICollectionView?
@@ -51,6 +51,10 @@ class FactCollectionViewController: UIViewController {
         super.viewDidLoad()
         setUpAnimation()
         activityIndicator?.startAnimating()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        collectionView?.reloadData()
     }
     
     func setUpAnimation() {
@@ -95,7 +99,7 @@ class FactCollectionViewController: UIViewController {
         
         self.collectionView?.reloadData()
         viewModelFact.getFact { fact in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [unowned self] in
                 self.viewModelFact.fact = fact
                 self.activityIndicator?.stopAnimating()
                 self.collectionView?.reloadData()
@@ -151,30 +155,30 @@ extension FactCollectionViewController: HandlePanGestureDelegate {
 extension FactCollectionViewController: FavoriteButtonActionsDelegate {
     
     func favButtonAction(button: UIButton) {
-        viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
-        updateFavButton(isFavorite: viewModelFavorite.isFavorite, button: button)
-    }
-    
-    func updateFavButton(isFavorite: Bool, button: UIButton) {
         impact.impactOccurred()
-        if viewModelFavorite.isFavorite {
+        let favoriteFacts = viewModelFavorite.getAll()
+        var foundFavorite = false
+        for fact in favoriteFacts {
+            if fact.favoriteText == viewModelFact.fact?.fact {
+                button.setImage(UIImage(named: "heartEmpty"), for: .normal)
+                guard let fact = viewModelFact.fact else {return}
+                
+                let favoriteFacts = viewModelFavorite.getAll()
+                
+                for favorite in favoriteFacts{
+                    if favorite.favoriteText == fact.fact {
+                        guard let id = favorite.id else {return}
+                        viewModelFavorite.deleteItem(id: id)
+                    }
+                }
+                foundFavorite = true
+                break
+            }
+        }
+        if foundFavorite == false {
             button.setImage(UIImage(named: "heartFill"), for: .normal)
             guard let fact = viewModelFact.fact else {return}
             viewModelFact.save(fact: fact )
-        } else {
-            
-            button.setImage(UIImage(named: "heartEmpty"), for: .normal)
-            guard let fact = viewModelFact.fact else {return}
-            
-            let favoriteFacts = viewModelFavorite.getAll()
-            
-            for favorite in favoriteFacts{
-                if favorite.favoriteText == fact.fact {
-                    guard let id = favorite.id else {return}
-                    viewModelFavorite.deleteItem(id: id)
-                }
-            }
-            
         }
     }
 }
@@ -193,10 +197,19 @@ extension FactCollectionViewController: UICollectionViewDataSource, UICollection
         }
         
         factCell.cardLabel.text = viewModelFact.fact?.fact
-        factCell.buttonFavorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
+        var foundFavorite = false
+        let favoriteFacts = viewModelFavorite.getAll()
+        for fact in favoriteFacts {
+            if fact.favoriteText == viewModelFact.fact?.fact {
+                factCell.buttonFavorite.setImage(UIImage(named: "heartFill"), for: .normal)
+                foundFavorite = true
+                break
+            }
+        }
+        if foundFavorite == false {
+            factCell.buttonFavorite.setImage(UIImage(named: "heartEmpty"), for: .normal)
+        }
         factCell.delegate = self
-
-        
         return factCell
     }
     
