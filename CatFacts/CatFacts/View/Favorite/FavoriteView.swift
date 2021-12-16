@@ -12,7 +12,7 @@ class FavoriteView: UIView {
     var controller : FavoriteViewController?
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-        collectionView.register(FactCell.self, forCellWithReuseIdentifier: FactCell.identifier)
+        collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.id)
         collectionView.backgroundColor = .yellowPrimary
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
