@@ -164,7 +164,7 @@ class FactsView: UIView {
             buttonNewFact.heightAnchor.constraint(equalToConstant: 42),
             buttonNewFact.widthAnchor.constraint(equalToConstant: 138),
             buttonNewFact.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            buttonNewFact.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100),
+            buttonNewFact.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             
             activityIndicator.centerXAnchor.constraint(equalTo: card.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: card.centerYAnchor)
@@ -177,10 +177,9 @@ class FactsView: UIView {
         delegate?.handlePan(sender: sender)
     }
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setUpConstraints()
         card.layer.cornerRadius = 20
         self.backgroundColor = .yellowPrimary
