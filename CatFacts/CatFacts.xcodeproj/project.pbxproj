@@ -19,6 +19,7 @@
 		EF1FEEA825CD6F5900A23358 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEA725CD6F5900A23358 /* Model.swift */; };
 		EF1FEEBB25CD86DA00A23358 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */; };
 		EF1FEEC125CD896800A23358 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEEC025CD896800A23358 /* Colors.swift */; };
+		EF2DF4AF25DD6947001D40B4 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2DF4AE25DD6947001D40B4 /* FavoriteCell.swift */; };
 		EF2FA1F925D55BC0007CD7C2 /* CatFacts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF1FEE5C25CD6B5A00A23358 /* CatFacts.xcdatamodeld */; };
 		EF2FA24D25D5639A007CD7C2 /* TestCoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2FA24C25D5639A007CD7C2 /* TestCoreDataFunctions.swift */; };
 		EFA26A2025CF7B1D00E97AF7 /* FactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */; };
@@ -71,6 +72,7 @@
 		EF1FEEA725CD6F5900A23358 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EF1FEEBA25CD86DA00A23358 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EF1FEEC025CD896800A23358 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EF2DF4AE25DD6947001D40B4 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		EF2FA24C25D5639A007CD7C2 /* TestCoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataFunctions.swift; sourceTree = "<group>"; };
 		EFA26A1F25CF7B1D00E97AF7 /* FactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCell.swift; sourceTree = "<group>"; };
 		EFA26A3C25CF9BCF00E97AF7 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		EF1FEE8B25CD6E8A00A23358 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EF2DF4AD25DD6937001D40B4 /* FavoriteCell */,
 				EFA4109D25D4491E00DF7841 /* LaunchScreen */,
 				EFA4109C25D4491000DF7841 /* TabBar */,
 				EFA26A5A25CFA36200E97AF7 /* FactCell */,
@@ -231,6 +234,14 @@
 				EFA26A3C25CF9BCF00E97AF7 /* Fonts.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		EF2DF4AD25DD6937001D40B4 /* FavoriteCell */ = {
+			isa = PBXGroup;
+			children = (
+				EF2DF4AE25DD6947001D40B4 /* FavoriteCell.swift */,
+			);
+			path = FavoriteCell;
 			sourceTree = "<group>";
 		};
 		EFA26A5A25CFA36200E97AF7 /* FactCell */ = {
@@ -420,6 +431,7 @@
 				EFA26A6825D0E9FD00E97AF7 /* FavoriteViewController.swift in Sources */,
 				EF1FEE5E25CD6B5A00A23358 /* CatFacts.xcdatamodeld in Sources */,
 				EFA26A7125D1807500E97AF7 /* APIHandler.swift in Sources */,
+				EF2DF4AF25DD6947001D40B4 /* FavoriteCell.swift in Sources */,
 				EFA4107425D3FC2700DF7841 /* ViewModelFavorite.swift in Sources */,
 				EF1FEEA325CD6F4D00A23358 /* ViewModelFact.swift in Sources */,
 				EF1FEE5625CD6B5A00A23358 /* SceneDelegate.swift in Sources */,

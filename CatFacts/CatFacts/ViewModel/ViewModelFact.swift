@@ -10,9 +10,16 @@ import UIKit
 import CoreData
 
 public class ViewModelFact {
+    
+    static var sharedViewModelFact: ViewModelFact = {
+            let viewModel = ViewModelFact()
+            return viewModel
+    }()
+    
     let service = APIHandler()
     let persistenceService = CoreDataFunctions()
     var fact: Fact?
+    var isFavorite: Bool = false
 
     //MARK:- API
     func getFact(completionHandler: @escaping (Fact) -> Void) {
@@ -31,5 +38,11 @@ public class ViewModelFact {
     
     func getAll(context: NSManagedObjectContext = AppDelegate.viewContext) -> [Favorite] {
         return persistenceService.getAll(context: context)
+    }
+}
+
+extension ViewModelFact: NSCopying {
+    public func copy(with zone: NSZone? = nil) -> Any {
+        return self
     }
 }

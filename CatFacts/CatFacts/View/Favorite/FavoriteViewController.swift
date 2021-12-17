@@ -48,32 +48,30 @@ extension FavoriteViewController: UICollectionViewDataSource {
         
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       
+        guard let favoriteCell  = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.id, for: indexPath) as? FavoriteCell else { fatalError() }
         
-        guard let factCell  = collectionView.dequeueReusableCell(withReuseIdentifier: FactCell.identifier, for: indexPath) as? FactCell else { fatalError() }
-        
-        factCell.delegate = self
-        factCell.cardLabel.text = viewModelFavorite.favoriteFacts?[indexPath.item  ].favoriteText
-        factCell.buttonFavorite.setImage(UIImage(named: "heartFill"), for: .normal)
-        factCell.buttonFavorite.tag = indexPath.row
-        return factCell
+        favoriteCell.delegateFavorite = self
+        favoriteCell.cardLabel.text = viewModelFavorite.favoriteFacts?[indexPath.item  ].favoriteText
+        favoriteCell.buttonFavorite.setImage(UIImage(named: "heartFill"), for: .normal)
+        favoriteCell.buttonFavorite.tag = indexPath.row
+        return favoriteCell
         
     }
 }
 
-extension FavoriteViewController: FavoriteButtonActionsDelegate {
-    func favButtonAction(button: UIButton) {
+extension FavoriteViewController: FavoriteButtonActionDelegate {
+    func favoriteButtonAction(button: UIButton) {
         impact.impactOccurred()
-        viewModelFavorite.isFavorite = !viewModelFavorite.isFavorite
         let favoriteFacts = viewModelFavorite.favoriteFacts
         guard let id = favoriteFacts?[button.tag].id else {return}
+        if favoriteFacts?[button.tag].favoriteText == ViewModelFact.sharedViewModelFact.fact?.fact {
+            ViewModelFact.sharedViewModelFact.isFavorite = false
+        }
         viewModelFavorite.deleteItem(id:id)
         getData()
         collectionView?.reloadData()
-             
- 
     }
 }
 

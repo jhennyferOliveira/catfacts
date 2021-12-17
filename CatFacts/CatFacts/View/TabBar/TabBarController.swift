@@ -13,6 +13,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        UITabBar.appearance().barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,16 +30,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         item2.tabBarItem = icon2
         item1.tabBarItem = icon1
-        tabBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        
-        
-        let controllers = [item1, item2]  //array of the root view controllers displayed by the tab bar interface
-        self.viewControllers = controllers
-    }
 
-    //Delegate methods
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        return true;
+        let controllers = [item1, item2]
+        self.viewControllers = controllers
     }
 }
