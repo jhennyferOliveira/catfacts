@@ -8,15 +8,14 @@
 import Foundation
 import UIKit
 
-protocol FavoriteButtonActionsDelegate {
+protocol FavoriteButtonActionsDelegate: AnyObject {
     func favButtonAction(button: UIButton)
 }
 
 class FactCell: UICollectionViewCell {
-   
-    
-    var factCollectionViewController: FactCollectionViewController?
-    var delegate: FavoriteButtonActionsDelegate?
+ 
+    weak var factCollectionViewController: FactCollectionViewController?
+    weak var delegate: FavoriteButtonActionsDelegate?
     static let identifier = "factCell"
     
     lazy var cardLabel: UILabel = {
@@ -40,9 +39,7 @@ class FactCell: UICollectionViewCell {
         
         return buttonFavorite
     }()
-    
-    
-    
+
     func setUpConstraints() {
         self.addSubview(cardLabel)
         self.addSubview(buttonFavorite)
@@ -56,8 +53,6 @@ class FactCell: UICollectionViewCell {
             buttonFavorite.topAnchor.constraint(equalTo: cardLabel.bottomAnchor),
             buttonFavorite.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 284),
             buttonFavorite.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
-            
-            
         ])
     }
     
