@@ -18,6 +18,4 @@ class FavoriteCell: FactCell {
     override func buttonFavTouchUpInside(button: UIButton) {
         delegateFavorite?.favoriteButtonAction(button: buttonFavorite)
     }
-   
-    
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class FavoriteViewController: UIViewController, UICollectionViewDelegate {
     
-    let viewModelFavorite = ViewModelFavorite()
+    let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
     var collectionView: UICollectionView?
     var placeholder: UILabel?
     let impact = UIImpactFeedbackGenerator()
@@ -18,6 +18,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         getData()
     }
+    
     override func loadView() {
         super.loadView()
         let favoriteView = FavoriteView()
@@ -28,7 +29,6 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate {
         placeholder = favoriteView.placeholder
         self.view = favoriteView
         overrideUserInterfaceStyle = .light
-        
     }
     
     func getData() {
