@@ -11,11 +11,11 @@ import CoreData
 
 class ViewModelFactTests: XCTestCase {
 
-    var sut: ViewModelFact?
+    var sut: ViewModelFactSingleton?
     
 
     func testSave() {
-        sut = ViewModelFact()
+        sut = ViewModelFactSingleton.getViewModelFactInstance()
         let fact = Fact(fact: "fact 1", length: 12)
         sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
         let allFacts = sut?.getAll(context: mockPersistantContainer.viewContext)
@@ -30,7 +30,7 @@ class ViewModelFactTests: XCTestCase {
     }
     
     func testGet() {
-        sut = ViewModelFact()
+        sut = ViewModelFactSingleton.getViewModelFactInstance()
         guard let factsBeforeSaving = sut?.getAll(context: mockPersistantContainer.viewContext) else {return}
         let fact = Fact(fact: "fact 2", length: 12)
         sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
@@ -41,7 +41,7 @@ class ViewModelFactTests: XCTestCase {
     }
     
     func testDelete() {
-        sut = ViewModelFact()
+        sut = ViewModelFactSingleton.getViewModelFactInstance()
         
         let fact = Fact(fact: "fact 3", length: 12)
         sut?.save(fact: fact, context: mockPersistantContainer.viewContext)

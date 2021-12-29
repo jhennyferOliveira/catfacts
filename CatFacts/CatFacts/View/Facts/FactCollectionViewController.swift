@@ -21,8 +21,8 @@ class FactCollectionViewController: UIViewController {
     var activityIndicator: UIActivityIndicatorView?
     let impact = UIImpactFeedbackGenerator()
     
-    private let viewModelFact = ViewModelFact.sharedViewModelFact
-    private let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
+    private let viewModelFact = ViewModelFactSingleton.getViewModelFactInstance()
+    private let viewModelFavorite = ViewModelFavoriteSingleton.getViewModelFavoriteInstance()
     var button: UIButton?
     var favorite: Favorite?
     var collectionView: UICollectionView?
