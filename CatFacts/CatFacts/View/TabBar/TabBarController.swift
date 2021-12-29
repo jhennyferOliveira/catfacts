@@ -13,7 +13,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-        UITabBar.appearance().barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        UITabBar.appearance().backgroundColor = .white
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +30,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         item2.tabBarItem = icon2
         item1.tabBarItem = icon1
-
         let controllers = [item1, item2]
         self.viewControllers = controllers
     }
