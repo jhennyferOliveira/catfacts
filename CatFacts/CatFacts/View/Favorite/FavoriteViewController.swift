@@ -10,7 +10,8 @@ import UIKit
 
 class FavoriteViewController: UIViewController, UICollectionViewDelegate {
     
-    let viewModelFavorite = ViewModelFavorite.sharedViewModelFavorite
+    let viewModelFavorite = ViewModelFavoriteSingleton.getViewModelFavoriteInstance()
+    let viewModelFact = ViewModelFactSingleton.getViewModelFactInstance()
     var collectionView: UICollectionView?
     var placeholder: UILabel?
     let impact = UIImpactFeedbackGenerator()
@@ -66,8 +67,8 @@ extension FavoriteViewController: FavoriteButtonActionDelegate {
         impact.impactOccurred()
         let favoriteFacts = viewModelFavorite.favoriteFacts
         guard let id = favoriteFacts?[button.tag].id else {return}
-        if favoriteFacts?[button.tag].favoriteText == ViewModelFact.sharedViewModelFact.fact?.fact {
-            ViewModelFact.sharedViewModelFact.isFavorite = false
+        if favoriteFacts?[button.tag].favoriteText == viewModelFact.fact?.fact {
+            viewModelFact.isFavorite = false
         }
         viewModelFavorite.deleteItem(id:id)
         getData()
