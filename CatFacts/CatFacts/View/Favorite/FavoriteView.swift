@@ -10,6 +10,7 @@ import UIKit
 
 class FavoriteView: UIView {
     weak var controller : FavoriteViewController?
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.id)
@@ -39,7 +40,8 @@ class FavoriteView: UIView {
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
             placeholder.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
             placeholder.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             placeholder.widthAnchor.constraint(equalToConstant: 250)

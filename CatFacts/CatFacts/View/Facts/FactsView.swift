@@ -15,6 +15,14 @@ protocol HandlePanGestureDelegate {
 class FactsView: UIView {
     weak var controller: FactCollectionViewController?
     var delegate: HandlePanGestureDelegate?
+    
+    lazy var view: UIView = {
+        let view = UIView()
+        view.backgroundColor = .yellowPrimary
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var viewForAnimation: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 283))
         view.backgroundColor = .yellowPrimary
@@ -119,17 +127,23 @@ class FactsView: UIView {
        }()
     
     func setUpConstraints() {
-        self.addSubview(viewForAnimation)
+        self.addSubview(view)
+        view.addSubview(viewForAnimation)
         viewForAnimation.addSubview(animationImage)
         viewForAnimation.addSubview(floorImage)
-        self.addSubview(card)
-        self.addSubview(buttonNewFact)
+        view.addSubview(card)
+        view.addSubview(buttonNewFact)
         viewForAnimation.addSubview(ball)
         animationImage.addSubview(viewForEyes)
         card.addSubview(activityIndicator)
         
         
         NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: self.topAnchor),
+            view.leftAnchor.constraint(equalTo: self.leftAnchor),
+            view.rightAnchor.constraint(equalTo: self.rightAnchor),
+            view.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
             viewForAnimation.topAnchor.constraint(equalTo: self.topAnchor),
             viewForAnimation.leftAnchor.constraint(equalTo: self.leftAnchor),
             viewForAnimation.rightAnchor.constraint(equalTo: self.rightAnchor),
@@ -164,7 +178,7 @@ class FactsView: UIView {
             buttonNewFact.heightAnchor.constraint(equalToConstant: 42),
             buttonNewFact.widthAnchor.constraint(equalToConstant: 138),
             buttonNewFact.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            buttonNewFact.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            buttonNewFact.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             
             activityIndicator.centerXAnchor.constraint(equalTo: card.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: card.centerYAnchor)
@@ -178,11 +192,10 @@ class FactsView: UIView {
     }
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+        super.init(frame: .zero)
         setUpConstraints()
         card.layer.cornerRadius = 20
-        self.backgroundColor = .yellowPrimary
+        self.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
