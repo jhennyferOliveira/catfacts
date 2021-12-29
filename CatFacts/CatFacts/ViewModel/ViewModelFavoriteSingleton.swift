@@ -1,29 +1,26 @@
 //
-//  ViewModel.swift
+//  ViewModelFavorite.swift
 //  CatFacts
 //
-//  Created by Jhennyfer Rodrigues de Oliveira on 05/02/21.
+//  Created by Jhennyfer Rodrigues de Oliveira on 10/02/21.
 //
 
 import Foundation
 import UIKit
 import CoreData
 
-public class ViewModelFact {
+class ViewModelFavoriteSingleton {
     
-    static var sharedViewModelFact: ViewModelFact = {
-            let viewModel = ViewModelFact()
-            return viewModel
-    }()
+    private static var sharedViewModelFavorite = ViewModelFavoriteSingleton()
     
-    let service = APIHandler()
-    let persistenceService = CoreDataFunctions()
-    var fact: Fact?
+    let persistenceService = CoreDataFunctions(container: AppDelegate.persistentContainer)
+    
+    var favoriteFacts: [Favorite]? = []
     var isFavorite: Bool = false
+    var favFacts: [Favorite]?
 
-    //MARK:- API
-    func getFact(completionHandler: @escaping (Fact) -> Void) {
-        service.getDataFromAPI(completionHandler: completionHandler)
+    static func getViewModelFavoriteInstance() -> ViewModelFavoriteSingleton {
+        return ViewModelFavoriteSingleton.sharedViewModelFavorite
     }
     
     //MARK:- COREDATA
@@ -38,11 +35,5 @@ public class ViewModelFact {
     
     func getAll(context: NSManagedObjectContext = AppDelegate.viewContext) -> [Favorite] {
         return persistenceService.getAll(context: context)
-    }
-}
-
-extension ViewModelFact: NSCopying {
-    public func copy(with zone: NSZone? = nil) -> Any {
-        return self
     }
 }
