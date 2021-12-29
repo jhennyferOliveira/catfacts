@@ -11,10 +11,10 @@ import CoreData
 
 class ViewModelFavoriteTests: XCTestCase {
 
-    var sut: ViewModelFavorite?
+    var sut: ViewModelFavoriteSingleton?
     
     func testSave() {
-        sut = ViewModelFavorite()
+        sut = ViewModelFavoriteSingleton.getViewModelFavoriteInstance()
         let fact = Fact(fact: "fact 1", length: 12)
         sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
         let allFacts = sut?.getAll(context: mockPersistantContainer.viewContext)
@@ -29,7 +29,7 @@ class ViewModelFavoriteTests: XCTestCase {
     }
     
     func testGet() {
-        sut = ViewModelFavorite()
+        sut = ViewModelFavoriteSingleton.getViewModelFavoriteInstance()
         guard let factsBeforeSaving = sut?.getAll(context: mockPersistantContainer.viewContext) else {return}
         let fact = Fact(fact: "fact 2", length: 12)
         sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
@@ -40,8 +40,7 @@ class ViewModelFavoriteTests: XCTestCase {
     }
     
     func testDelete() {
-        sut = ViewModelFavorite()
-        
+        sut = ViewModelFavoriteSingleton.getViewModelFavoriteInstance()   
         let fact = Fact(fact: "fact 3", length: 12)
         sut?.save(fact: fact, context: mockPersistantContainer.viewContext)
         guard let factsBeforeDeleting = sut?.getAll(context: mockPersistantContainer.viewContext) else {return}
